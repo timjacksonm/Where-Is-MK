@@ -1,0 +1,8 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+.background {
+  width: 100%;
+}

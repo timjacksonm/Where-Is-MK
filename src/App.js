@@ -1,16 +1,7 @@
-import React, { useEffect } from 'react';
-import './app.css';
-import test from './firebase/index';
+import Router from './Router';
 
 function App() {
-  useEffect(() => {
-    test();
-  }, []);
-  return (
-    <div className="app">
-      <div>app</div>
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
