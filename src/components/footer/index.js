@@ -6,14 +6,17 @@ import './index.css';
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="name">Created by TJ</div>
-      <div className="logo">
-        <a href="https://github.com/timjacksonm">
-          <Github />
-        </a>
-        <a href="https://twitter.com/TimJacksonMN">
-          <Twitter />
-        </a>
+      <div>Attributions</div>
+      <div className="self">
+        <div className="name">Created by TJ</div>
+        <div className="links">
+          <a href="https://github.com/timjacksonm">
+            <Github />
+          </a>
+          <a href="https://twitter.com/TimJacksonMN">
+            <Twitter />
+          </a>
+        </div>
       </div>
     </div>
   );

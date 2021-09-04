@@ -2,16 +2,21 @@ import React from 'react';
 import './index.css';
 import Header from './../../header';
 import Footer from './../../footer';
-import { pictures } from '../../../data/pictures/index.js';
+import Logo from '../../../assets/Mortal-Kombat-logo.png';
 
 const Home = () => {
-  console.log(pictures);
   return (
     <div className="home">
-      <Header />
-      {pictures.map((image) => {
-        return <img src={image} alt="" />;
-      })}
+      <div className="logoContainer">
+        <h1>WHERE IS</h1>
+        <div className="textImageText">
+          <h1>MORTAL</h1>
+          <img className="image" src={Logo} alt="Mortal Kombat Dragon Logo" />
+          <h1>KOMBAT</h1>
+        </div>
+        <div>a Seek-and-Find game</div>
+      </div>
+      {/* settings component */}
       <Footer />
     </div>
   );
