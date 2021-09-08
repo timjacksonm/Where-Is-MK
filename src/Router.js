@@ -10,7 +10,7 @@ const Router = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/game">
+        <Route path="/game/:time/:characters">
           <Game />
         </Route>
         <Route path="/results">

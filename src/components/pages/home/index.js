@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
-import Header from './../../header';
 import Footer from './../../footer';
+import Settings from '../settings';
 import Logo from '../../../assets/Mortal-Kombat-logo.png';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
         </div>
         <div>a Seek-and-Find game</div>
       </div>
-      {/* settings component */}
+      <Settings />
       <Footer />
     </div>
   );

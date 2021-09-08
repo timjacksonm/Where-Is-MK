@@ -9,6 +9,7 @@
 .self {
   display: flex;
   align-items: inherit;
+  height: 2em;
 }
 .links {
   display: flex;
