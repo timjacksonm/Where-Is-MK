@@ -1,8 +1,12 @@
 .game {
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100vh;
+  background-color: #000;
 }
 .background {
   width: 100%;
+}
+.loader {
+  align-self: center;
 }

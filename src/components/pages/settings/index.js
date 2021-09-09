@@ -71,7 +71,7 @@ const Settings = () => {
             />
           </RadioGroup>
           <FormHelperText>{helperText}</FormHelperText>
-          <button type="submit" class="button-7">
+          <button type="submit" className="button-7">
             Start
           </button>
         </FormControl>
