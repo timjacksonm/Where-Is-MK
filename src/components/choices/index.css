@@ -1,0 +1,11 @@
+.modal {
+  position: absolute;
+  width: 350px;
+  height: 200px;
+  background-color: lime;
+}
+
+.target {
+  position: absolute;
+  width: 50px;
+}
