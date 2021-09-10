@@ -3,6 +3,7 @@ import './index.css';
 
 const Choices = (props) => {
   const { modalX, modalY, targetX, targetY } = props.mouseXY;
+  const { charactersToFind } = props;
   let divStyle = {
     left: `${modalX}px`,
     top: `${modalY}px`,
@@ -11,6 +12,7 @@ const Choices = (props) => {
     left: `${targetX}px`,
     top: `${targetY}px`,
   };
+
   return (
     <>
       <svg
@@ -31,7 +33,18 @@ const Choices = (props) => {
           <polygon points="160.6,442.5 47.5,442.5 47.5,329.4 0,329.4 0,490 160.6,490 			" />
         </g>
       </svg>
-      <div style={divStyle} className="modal"></div>
+      <div style={divStyle} className="modal">
+        {charactersToFind
+          .sort((a, b) => a.id - b.id)
+          .map(({ id, name, src }) => {
+            return (
+              <div id={id}>
+                <p>{name + id}</p>
+                <img src={src} alt={id} />
+              </div>
+            );
+          })}
+      </div>
     </>
   );
 };
