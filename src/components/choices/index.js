@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './index.css';
 
 const Choices = (props) => {
   const { modalX, modalY, targetX, targetY } = props.mouseXY;
   const { charactersToFind } = props;
-  let divStyle = {
+  const modalContainerStyle = {
     left: `${modalX}px`,
     top: `${modalY}px`,
   };
-  let divStyle2 = {
+  const targetStyle = {
     left: `${targetX}px`,
     top: `${targetY}px`,
   };
 
   return (
-    <>
+    <div>
       <svg
         className="target"
-        style={divStyle2}
+        style={targetStyle}
         width="50px"
         version="1.1"
         id="Capa_1"
@@ -33,19 +33,22 @@ const Choices = (props) => {
           <polygon points="160.6,442.5 47.5,442.5 47.5,329.4 0,329.4 0,490 160.6,490 			" />
         </g>
       </svg>
-      <div style={divStyle} className="modal">
+      <div style={modalContainerStyle} className="modal">
         {charactersToFind
           .sort((a, b) => a.id - b.id)
           .map(({ id, name, src }) => {
             return (
-              <div id={id}>
-                <p>{name + id}</p>
-                <img src={src} alt={id} />
+              <div className="card" key={id}>
+                <div className="portrait">
+                  <img className="headshot" src={src} alt={id} />
+                </div>
+
+                <p className="name">{name}</p>
               </div>
             );
           })}
       </div>
-    </>
+    </div>
   );
 };
 

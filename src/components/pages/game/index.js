@@ -17,7 +17,7 @@ const Game = () => {
   const [loaded, setLoaded] = useState(false);
   const [background, setBackground] = useState();
   const [mouseXY, setMouseXY] = useState(false);
-  const [charactersToFind, setCharactersToFind] = useState(() => {
+  const [charactersToFind] = useState(() => {
     const array = [];
     const length = Number(characters) || 79;
     for (let i = 0; array.length !== length; i++) {
