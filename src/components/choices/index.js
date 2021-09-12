@@ -3,7 +3,7 @@ import './index.css';
 import { ReactComponent as Target } from '../../assets/target.svg';
 
 const Choices = (props) => {
-  const { modalX, modalY, targetX, targetY } = props.mouseXY;
+  const { modalX, modalY, targetX, targetY } = props.positionXY;
   const { charactersToFind, setMouseXY, setAlertText } = props;
 
   const modalStyle = {

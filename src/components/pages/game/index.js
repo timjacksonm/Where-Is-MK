@@ -11,7 +11,7 @@ const Game = () => {
   const { time, amountToFind } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [background, setBackground] = useState();
-  const [mouseXY, setMouseXY] = useState(false);
+  const [positionXY, setPositionXY] = useState(false);
   const [alertText, setAlertText] = useState(false);
   const charactersToFind = useCharacters(
     getRandomCharacters(amountToFind, 1, 79)
@@ -24,37 +24,32 @@ const Game = () => {
       availableSpaceX: imgRef.current.offsetWidth - e.pageX,
       availableSpaceY: imgRef.current.offsetHeight - e.pageY,
     };
+    let modalPosition = { modalX: e.pageX + 30, modalY: e.pageY + 25 };
     //modal width:350px, height: 200px
-    // availableSpace < width || height ? change modal position so it stays visable on page.
+    // availableSpace < width || height ? change choices modal position so it stays visable on page : keep the same
     if (availableSpaceX < 350 && availableSpaceY > 200) {
-      setMouseXY({
+      modalPosition = {
         modalX: e.pageX - 375,
         modalY: e.pageY + 25,
-        targetX: e.pageX - 25,
-        targetY: e.pageY - 25,
-      });
-    } else if (availableSpaceX > 350 && availableSpaceY < 200) {
-      setMouseXY({
+      };
+    }
+    if (availableSpaceX > 350 && availableSpaceY < 200) {
+      modalPosition = {
         modalX: e.pageX + 25,
         modalY: e.pageY - 230,
-        targetX: e.pageX - 25,
-        targetY: e.pageY - 25,
-      });
-    } else if (availableSpaceX < 350 && availableSpaceY < 200) {
-      setMouseXY({
+      };
+    }
+    if (availableSpaceX < 350 && availableSpaceY < 200) {
+      modalPosition = {
         modalX: e.pageX - 375,
         modalY: e.pageY - 230,
-        targetX: e.pageX - 25,
-        targetY: e.pageY - 25,
-      });
-    } else {
-      setMouseXY({
-        modalX: e.pageX + 30,
-        modalY: e.pageY + 25,
-        targetX: e.pageX - 25,
-        targetY: e.pageY - 25,
-      });
+      };
     }
+    setPositionXY({
+      ...modalPosition,
+      targetX: e.pageX - 25,
+      targetY: e.pageY - 25,
+    });
   };
 
   useEffect(() => {
@@ -84,11 +79,11 @@ const Game = () => {
           onClick={handleClick}
         />
       </div>
-      {mouseXY && (
+      {positionXY && (
         <Choices
           charactersToFind={charactersToFind}
-          mouseXY={mouseXY}
-          setMouseXY={setMouseXY}
+          positionXY={positionXY}
+          setPositionXY={setPositionXY}
           setAlertText={setAlertText}
         />
       )}
