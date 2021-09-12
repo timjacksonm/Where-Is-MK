@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './index.css';
+import './game.css';
 import { ReactComponent as Loader } from '../../../assets/loader.svg';
 import Header from './../../header';
 import GameImage from '../../../assets/mkbackground.jpeg';
@@ -20,30 +20,27 @@ const Game = () => {
   const imgRef = useRef();
 
   const handleClick = (e) => {
-    if (
-      imgRef.current.offsetWidth - e.pageX < 350 &&
-      imgRef.current.offsetHeight - e.pageY > 200
-    ) {
+    const { availableSpaceX, availableSpaceY } = {
+      availableSpaceX: imgRef.current.offsetWidth - e.pageX,
+      availableSpaceY: imgRef.current.offsetHeight - e.pageY,
+    };
+    //modal width:350px, height: 200px
+    // availableSpace < width || height ? change modal position so it stays visable on page.
+    if (availableSpaceX < 350 && availableSpaceY > 200) {
       setMouseXY({
         modalX: e.pageX - 375,
         modalY: e.pageY + 25,
         targetX: e.pageX - 25,
         targetY: e.pageY - 25,
       });
-    } else if (
-      imgRef.current.offsetHeight - e.pageY < 200 &&
-      imgRef.current.offsetWidth - e.pageX > 350
-    ) {
+    } else if (availableSpaceX > 350 && availableSpaceY < 200) {
       setMouseXY({
         modalX: e.pageX + 25,
         modalY: e.pageY - 230,
         targetX: e.pageX - 25,
         targetY: e.pageY - 25,
       });
-    } else if (
-      imgRef.current.offsetWidth - e.pageX < 350 &&
-      imgRef.current.offsetHeight - e.pageY < 200
-    ) {
+    } else if (availableSpaceX < 350 && availableSpaceY < 200) {
       setMouseXY({
         modalX: e.pageX - 375,
         modalY: e.pageY - 230,
@@ -70,14 +67,14 @@ const Game = () => {
     })();
   }, []);
   return (
-    <div className="game">
+    <div className="gameScreen">
       <Header start />
       <Loader
         className="loader"
         style={!loaded ? { display: 'block' } : { display: 'none' }}
       />
-      <div>
-        {alertText && <h1>{alertText}</h1>}
+      <div className="main">
+        {alertText && <h1 className="alertText">{alertText}</h1>}
         <img
           ref={imgRef}
           className="background"
