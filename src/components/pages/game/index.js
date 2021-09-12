@@ -20,11 +20,17 @@ const Game = () => {
   const imgRef = useRef();
 
   const handleClick = (e) => {
-    const { availableSpaceX, availableSpaceY } = {
-      availableSpaceX: imgRef.current.offsetWidth - e.pageX,
-      availableSpaceY: imgRef.current.offsetHeight - e.pageY,
+    const { pageX, pageY } = e;
+    const exactCoords = {
+      x: pageX / imgRef.current.offsetWidth,
+      y: (pageY - 100) / imgRef.current.offsetHeight,
     };
-    let modalPosition = { modalX: e.pageX + 30, modalY: e.pageY + 25 };
+    const targetPosition = { targetX: e.pageX - 25, targetY: e.pageY - 25 };
+    const { availableSpaceX, availableSpaceY } = {
+      availableSpaceX: imgRef.current.offsetWidth - pageX,
+      availableSpaceY: imgRef.current.offsetHeight - pageY,
+    };
+    let modalPosition = { modalX: e.pageX + 30, modalY: pageY + 25 };
     //modal width:350px, height: 200px
     // availableSpace < width || height ? change choices modal position so it stays visable on page : keep the same
     if (availableSpaceX < 350 && availableSpaceY > 200) {
@@ -46,11 +52,22 @@ const Game = () => {
       };
     }
     setPositionXY({
-      ...modalPosition,
-      targetX: e.pageX - 25,
-      targetY: e.pageY - 25,
+      exactCoords,
+      modalPosition,
+      targetPosition,
     });
   };
+
+  // useEffect(() => {
+  //   window.addEventListener('mousemove', (e) => {
+  //     const { pageX, pageY } = e;
+  //     const exactCoords = {
+  //       x: pageX / imgRef.current.offsetWidth,
+  //       y: (pageY - 100) / imgRef.current.offsetHeight,
+  //     };
+  //     console.log(exactCoords);
+  //   });
+  // });
 
   useEffect(() => {
     (async function loadImage() {

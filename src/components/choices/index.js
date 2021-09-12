@@ -1,11 +1,13 @@
 import React from 'react';
 import './index.css';
 import { ReactComponent as Target } from '../../assets/target.svg';
+import verifyCharacterData from '../../firebase';
 
 const Choices = (props) => {
-  const { modalX, modalY, targetX, targetY } = props.positionXY;
   const { charactersToFind, setPositionXY, setAlertText } = props;
-
+  const { targetX, targetY } = props.positionXY.targetPosition;
+  const { modalX, modalY } = props.positionXY.modalPosition;
+  const { exactCoords } = props.positionXY;
   const modalStyle = {
     left: `${modalX}px`,
     top: `${modalY}px`,
@@ -15,9 +17,9 @@ const Choices = (props) => {
     top: `${targetY}px`,
   };
 
-  const handleClick = (e, id, name) => {
+  const handleClick = async (id, name) => {
     //check with database if position matches character
-    const response = true;
+    const response = await verifyCharacterData(exactCoords, id);
     if (response) {
       setAlertText({ string: `You found ${name}`, bgColor: '#006400' });
       setTimeout(() => {
@@ -43,7 +45,7 @@ const Choices = (props) => {
             <div
               className="card"
               key={id}
-              onClick={(e) => handleClick(e, id, name)}
+              onClick={(e) => handleClick(id, name)}
             >
               <div className="portrait">
                 <img className="headshot" src={src} alt={id} />

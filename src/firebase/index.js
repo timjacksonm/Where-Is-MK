@@ -26,16 +26,18 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-const test = async () => {
-  const docRef = doc(db, 'characters', 'asdf');
+const verifyCharacterData = async (coords, id) => {
+  const { x, y } = coords;
+  const docRef = doc(db, 'where-is-mk', 'characters');
   const docSnap = await getDoc(docRef);
 
-  if (docSnap.exists()) {
-    console.log('Document data:', docSnap.data());
+  if (docSnap.data()[id]) {
+    const { minimumX, minimumY, maximumX, maximumY } = docSnap.data()[id];
+    return x > minimumX && x < maximumX && y < minimumY && y > maximumY; // if coords are within container ? returns true : returns false
   } else {
     // doc.data() will be undefined in this case
-    console.log('No such document!');
+    console.log(`No such document! id:${id}`);
   }
 };
 
-export default test;
+export default verifyCharacterData;
