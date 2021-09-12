@@ -4,7 +4,7 @@ import { ReactComponent as Target } from '../../assets/target.svg';
 
 const Choices = (props) => {
   const { modalX, modalY, targetX, targetY } = props.positionXY;
-  const { charactersToFind, setMouseXY, setAlertText } = props;
+  const { charactersToFind, setPositionXY, setAlertText } = props;
 
   const modalStyle = {
     left: `${modalX}px`,
@@ -19,13 +19,19 @@ const Choices = (props) => {
     //check with database if position matches character
     const response = true;
     if (response) {
-      setAlertText(`You found ${name}`);
+      setAlertText({ string: `You found ${name}`, bgColor: '#006400' });
+      setTimeout(() => {
+        setAlertText(false);
+      }, 2000);
       charactersToFind.removeById(id);
     }
     if (!response) {
-      setAlertText(`Keep looking!`);
+      setAlertText({ string: `Keep looking!`, bgColor: '#ea1a30' });
+      setTimeout(() => {
+        setAlertText(false);
+      }, 2000);
     }
-    setMouseXY(false);
+    setPositionXY(false);
   };
 
   return (

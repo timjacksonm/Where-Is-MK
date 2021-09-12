@@ -69,7 +69,14 @@ const Game = () => {
         style={!loaded ? { display: 'block' } : { display: 'none' }}
       />
       <div className="main">
-        {alertText && <h1 className="alertText">{alertText}</h1>}
+        {alertText && (
+          <h1
+            className="alertText"
+            style={{ backgroundColor: alertText.bgColor }}
+          >
+            {alertText.string}
+          </h1>
+        )}
         <img
           ref={imgRef}
           className="background"
