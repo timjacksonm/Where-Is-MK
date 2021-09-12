@@ -1,10 +1,12 @@
 import React from 'react';
 import './index.css';
+import { ReactComponent as Target } from '../../assets/target.svg';
 
 const Choices = (props) => {
   const { modalX, modalY, targetX, targetY } = props.mouseXY;
-  const { charactersToFind } = props;
-  const modalContainerStyle = {
+  const { charactersToFind, setMouseXY, setAlertText } = props;
+
+  const modalStyle = {
     left: `${modalX}px`,
     top: `${modalY}px`,
   };
@@ -13,40 +15,37 @@ const Choices = (props) => {
     top: `${targetY}px`,
   };
 
+  const handleClick = (e, id, name) => {
+    //check with database if position matches character
+    const response = true;
+    if (response) {
+      setAlertText(`You found ${name}`);
+      charactersToFind.removeById(id);
+    }
+    if (!response) {
+      setAlertText(`Keep looking!`);
+    }
+    setMouseXY(false);
+  };
+
   return (
     <div>
-      <svg
-        className="target"
-        style={targetStyle}
-        width="50px"
-        version="1.1"
-        id="Capa_1"
-        x="0px"
-        y="0px"
-        viewBox="0 0 490 490"
-        fill="#fff"
-      >
-        <g>
-          <polygon points="329.4,47.5 442.5,47.5 442.5,160.6 490,160.6 490,0 329.4,0 			" />
-          <polygon points="47.5,160.6 47.5,47.5 160.6,47.5 160.6,0 0,0 0,160.6 			" />
-          <polygon points="442.5,329.4 442.5,442.5 329.4,442.5 329.4,490 490,490 490,329.4 			" />
-          <polygon points="160.6,442.5 47.5,442.5 47.5,329.4 0,329.4 0,490 160.6,490 			" />
-        </g>
-      </svg>
-      <div style={modalContainerStyle} className="modal">
-        {charactersToFind
-          .sort((a, b) => a.id - b.id)
-          .map(({ id, name, src }) => {
-            return (
-              <div className="card" key={id}>
-                <div className="portrait">
-                  <img className="headshot" src={src} alt={id} />
-                </div>
-
-                <p className="name">{name}</p>
+      <Target style={targetStyle} />
+      <div style={modalStyle} className="modal">
+        {charactersToFind.characters.map(({ id, name, src }) => {
+          return (
+            <div
+              className="card"
+              key={id}
+              onClick={(e) => handleClick(e, id, name)}
+            >
+              <div className="portrait">
+                <img className="headshot" src={src} alt={id} />
               </div>
-            );
-          })}
+              <p className="name">{name}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

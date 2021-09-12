@@ -5,31 +5,18 @@ import Header from './../../header';
 import GameImage from '../../../assets/mkbackground.jpeg';
 import { useParams } from 'react-router-dom';
 import Choices from '../../choices';
-import MasterList from '../../../data/characters';
+import { getRandomCharacters, useCharacters } from '../../../globalHelpers';
 
 const Game = () => {
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
-  }
-  const { time, characters } = useParams();
+  const { time, amountToFind } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [background, setBackground] = useState();
   const [mouseXY, setMouseXY] = useState(false);
-  const [charactersToFind] = useState(() => {
-    const array = [];
-    const length = Number(characters) || 79;
-    for (let i = 0; array.length !== length; i++) {
-      const value = getRandomIntInclusive(1, 79);
-      if (!array.some((item) => item === value)) {
-        array.push(value);
-      }
-    }
-    return array.map((number) =>
-      MasterList.find((object) => object.id === number)
-    );
-  });
+  const [alertText, setAlertText] = useState(false);
+  const charactersToFind = useCharacters(
+    getRandomCharacters(amountToFind, 1, 79)
+  );
+
   const imgRef = useRef();
 
   const handleClick = (e) => {
@@ -89,16 +76,24 @@ const Game = () => {
         className="loader"
         style={!loaded ? { display: 'block' } : { display: 'none' }}
       />
-      <img
-        ref={imgRef}
-        className="background"
-        src={background}
-        alt="Mortal Kombat Seek And Find Artwork"
-        style={loaded ? { display: 'block' } : { display: 'none' }}
-        onClick={handleClick}
-      />
+      <div>
+        {alertText && <h1>{alertText}</h1>}
+        <img
+          ref={imgRef}
+          className="background"
+          src={background}
+          alt="Mortal Kombat Seek And Find Artwork"
+          style={loaded ? { display: 'block' } : { display: 'none' }}
+          onClick={handleClick}
+        />
+      </div>
       {mouseXY && (
-        <Choices charactersToFind={charactersToFind} mouseXY={mouseXY} />
+        <Choices
+          charactersToFind={charactersToFind}
+          mouseXY={mouseXY}
+          setMouseXY={setMouseXY}
+          setAlertText={setAlertText}
+        />
       )}
     </div>
   );
