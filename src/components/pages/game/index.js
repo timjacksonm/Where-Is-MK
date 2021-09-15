@@ -18,6 +18,7 @@ const Game = () => {
   const [background, setBackground] = useState();
   const [positionXY, setPositionXY] = useState(false);
   const [alertText, setAlertText] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const charactersToFind = useCharacters(
     getRandomCharacters(amountToFind, 1, 79)
   );
@@ -25,10 +26,11 @@ const Game = () => {
   const imgRef = useRef();
 
   const handleClick = (e) => {
+    const headerHeight = dropdownOpen ? 292 : 100;
     const { pageX, pageY } = e;
     const exactCoords = {
       x: pageX / imgRef.current.offsetWidth,
-      y: (pageY - 100) / imgRef.current.offsetHeight,
+      y: (pageY - headerHeight) / imgRef.current.offsetHeight,
     };
     const targetPosition = { targetX: e.pageX - 25, targetY: e.pageY - 25 };
     const { availableSpaceX, availableSpaceY } = {
@@ -74,7 +76,12 @@ const Game = () => {
   }, []);
   return (
     <PageContent>
-      <Header charactersToFind={charactersToFind} start />
+      <Header
+        charactersToFind={charactersToFind}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        start
+      />
       <Loader style={Loading ? { display: 'none' } : { display: 'block' }} />
       <MainContent>
         {alertText && <Alert $alertText={alertText}>{alertText.string}</Alert>}
