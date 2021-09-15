@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 
 export const HeaderContent = styled.div`
   display: flex;
@@ -23,6 +24,22 @@ export const FindContainer = styled.div`
 `;
 export const Count = styled.div`
   font-size: 1.3em;
+  color: #ea1a30;
+  font-weight: 700;
+`;
+export const OpenButton = styled(MdExpandLess)`
+  &:hover {
+    & path {
+      color: #ea1a30;
+    }
+  }
+`;
+export const CloseButton = styled(MdExpandMore)`
+  &:hover {
+    & path {
+      color: #ea1a30;
+    }
+  }
 `;
 export const CharacterList = styled.div`
   display: flex;

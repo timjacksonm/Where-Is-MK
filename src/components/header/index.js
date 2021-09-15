@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserSecret } from 'react-icons/fa';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import {
   HeaderContent,
   Navbar,
@@ -8,6 +7,8 @@ import {
   Count,
   CharacterList,
   Card,
+  OpenButton,
+  CloseButton,
 } from './header.styles.js';
 
 const Header = ({ start, charactersToFind, dropdownOpen, setDropdownOpen }) => {
@@ -30,9 +31,9 @@ const Header = ({ start, charactersToFind, dropdownOpen, setDropdownOpen }) => {
           <div>More</div>
           <FaUserSecret color="#000" size="2em" />
           {dropdownOpen ? (
-            <MdExpandLess size="2em" onClick={close} />
+            <OpenButton size="2em" onClick={close} />
           ) : (
-            <MdExpandMore size="2em" onClick={open} />
+            <CloseButton size="2em" onClick={open} />
           )}
         </FindContainer>
         <div>{'timer'}</div>
