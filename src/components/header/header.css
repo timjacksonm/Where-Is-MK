@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff9f00;
+  border-bottom: 1em solid #000;
+  padding: 2em 4em;
+  letter-spacing: 1px;
+}
+.navbar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.count {
+  font-size: 1.3em;
+}
+.findTitle {
+  display: flex;
+  width: 13em;
+  justify-content: space-around;
+}
+.findTitle div {
+  align-self: center;
+}
+.characters {
+  display: flex;
+  justify-content: center;
+}

@@ -32,7 +32,7 @@ const Game = () => {
     };
     let modalPosition = { modalX: e.pageX + 30, modalY: pageY + 25 };
     //modal width:350px, height: 200px
-    // availableSpace < width || height ? change choices modal position so it stays visable on page : keep the same
+    //availableSpace < width || height ? change choices modal position so it stays visable on page : keep the same
     if (availableSpaceX < 350 && availableSpaceY > 200) {
       modalPosition = {
         modalX: e.pageX - 375,
@@ -58,17 +58,6 @@ const Game = () => {
     });
   };
 
-  // useEffect(() => {
-  //   window.addEventListener('mousemove', (e) => {
-  //     const { pageX, pageY } = e;
-  //     const exactCoords = {
-  //       x: pageX / imgRef.current.offsetWidth,
-  //       y: (pageY - 100) / imgRef.current.offsetHeight,
-  //     };
-  //     console.log(exactCoords);
-  //   });
-  // });
-
   useEffect(() => {
     (async function loadImage() {
       const image = new Image();
@@ -80,7 +69,7 @@ const Game = () => {
   }, []);
   return (
     <div className="gameScreen">
-      <Header start />
+      <Header charactersToFind={charactersToFind} start />
       <Loader
         className="loader"
         style={!loaded ? { display: 'block' } : { display: 'none' }}

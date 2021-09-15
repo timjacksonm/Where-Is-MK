@@ -1,18 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import './index.css';
+import { FaUserSecret } from 'react-icons/fa';
+import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+import './header.css';
 
-const Header = ({ start }) => {
+const Header = ({ start, charactersToFind }) => {
   const [timer, setTimer] = useState('');
   const [findCount, setFindCount] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
 
+  const open = () => setModalOpen(true);
+  const close = () => setModalOpen(false);
   useEffect(() => {
     //start ? run timer && display remaining counter character to find
-  }, [start]);
+    const { characters } = charactersToFind;
+    setFindCount(characters.length);
+  }, [start, charactersToFind]);
   return (
     <div className="header">
-      <div>{timer}</div>
-      <div>Where-Is Mortal Kombat</div>
-      <div>{findCount}</div>
+      <div className="navbar">
+        <div className="findTitle">
+          <div>Find</div>
+          <div className="count">{findCount}</div>
+          <div>More</div>
+          <FaUserSecret color="#000" size="2em" />
+          {modalOpen ? (
+            <MdExpandLess size="2em" onClick={close} />
+          ) : (
+            <MdExpandMore size="2em" onClick={open} />
+          )}
+        </div>
+        <div>{'timer'}</div>
+      </div>
+      {modalOpen && (
+        <div className="characters">
+          {charactersToFind.characters.map(({ id, src, name }) => {
+            return (
+              <div key={id}>
+                <img src={src} alt={name} />
+                <div>{name}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

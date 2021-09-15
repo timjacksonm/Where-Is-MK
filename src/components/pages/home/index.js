@@ -1,7 +1,7 @@
 import React from 'react';
 import './home.css';
 import Footer from './../../footer';
-import Settings from '../settings';
+import Settings from './settings';
 import Logo from '../../../assets/Mortal-Kombat-logo.png';
 
 const Home = () => {

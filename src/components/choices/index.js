@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './choices.css';
 import { ReactComponent as Target } from '../../assets/target.svg';
 import verifyCharacterData from '../../firebase';
 
@@ -18,7 +18,6 @@ const Choices = (props) => {
   };
 
   const handleClick = async (id, name) => {
-    //check with database if position matches character
     const response = await verifyCharacterData(exactCoords, id);
     if (response) {
       setAlertText({ string: `You found ${name}`, bgColor: '#006400' });
@@ -45,7 +44,7 @@ const Choices = (props) => {
             <div
               className="card"
               key={id}
-              onClick={(e) => handleClick(id, name)}
+              onClick={() => handleClick(id, name)}
             >
               <div className="portrait">
                 <img className="headshot" src={src} alt={id} />
