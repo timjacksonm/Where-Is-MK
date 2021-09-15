@@ -1,21 +1,19 @@
 import React from 'react';
-import './choices.css';
-import { ReactComponent as Target } from '../../assets/target.svg';
+import {
+  ModalContent,
+  TargetIcon,
+  CharactersContainer,
+  Card,
+  PortraitContainer,
+  PortraitImage,
+  Name,
+} from './choices.styles';
 import verifyCharacterData from '../../firebase';
 
 const Choices = (props) => {
   const { charactersToFind, setPositionXY, setAlertText } = props;
-  const { targetX, targetY } = props.positionXY.targetPosition;
-  const { modalX, modalY } = props.positionXY.modalPosition;
+  const { targetPosition, modalPosition } = props.positionXY;
   const { exactCoords } = props.positionXY;
-  const modalStyle = {
-    left: `${modalX}px`,
-    top: `${modalY}px`,
-  };
-  const targetStyle = {
-    left: `${targetX}px`,
-    top: `${targetY}px`,
-  };
 
   const handleClick = async (id, name) => {
     const response = await verifyCharacterData(exactCoords, id);
@@ -36,25 +34,21 @@ const Choices = (props) => {
   };
 
   return (
-    <div>
-      <Target style={targetStyle} />
-      <div style={modalStyle} className="modal">
+    <ModalContent>
+      <TargetIcon targetPosition={targetPosition} />
+      <CharactersContainer modalPosition={modalPosition}>
         {charactersToFind.characters.map(({ id, name, src }) => {
           return (
-            <div
-              className="card"
-              key={id}
-              onClick={() => handleClick(id, name)}
-            >
-              <div className="portrait">
-                <img className="headshot" src={src} alt={id} />
-              </div>
-              <p className="name">{name}</p>
-            </div>
+            <Card key={id} onClick={() => handleClick(id, name)}>
+              <PortraitContainer>
+                <PortraitImage src={src} alt={id} />
+              </PortraitContainer>
+              <Name>{name}</Name>
+            </Card>
           );
         })}
-      </div>
-    </div>
+      </CharactersContainer>
+    </ModalContent>
   );
 };
 

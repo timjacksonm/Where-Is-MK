@@ -1,24 +1,24 @@
 import React from 'react';
-import { ReactComponent as Github } from '../../assets/github-icon.svg';
-import { ReactComponent as Twitter } from '../../assets/twitter.svg';
-import './index.css';
+import { ReactComponent as GithubIcon } from '../../assets/github-icon.svg';
+import { ReactComponent as TwitterIcon } from '../../assets/twitter.svg';
+import { Wrapper, MyInfo, LinkContainer, Link } from './footer.styles';
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <Wrapper>
       <div>Attributions</div>
-      <div className="self">
-        <div className="name">Created by TJ</div>
-        <div className="links">
-          <a href="https://github.com/timjacksonm">
-            <Github />
-          </a>
-          <a href="https://twitter.com/TimJacksonMN">
-            <Twitter />
-          </a>
-        </div>
-      </div>
-    </div>
+      <MyInfo>
+        <div>Created by TJ</div>
+        <LinkContainer>
+          <Link href="https://github.com/timjacksonm">
+            <GithubIcon />
+          </Link>
+          <Link href="https://twitter.com/TimJacksonMN">
+            <TwitterIcon />
+          </Link>
+        </LinkContainer>
+      </MyInfo>
+    </Wrapper>
   );
 };
 

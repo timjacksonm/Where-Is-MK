@@ -1,24 +1,29 @@
 import React from 'react';
-import './home.css';
+import {
+  PageContent,
+  LogoContainer,
+  TextImageText,
+  Image,
+} from './home.styles';
 import Footer from './../../footer';
 import Settings from './settings';
 import Logo from '../../../assets/Mortal-Kombat-logo.png';
 
 const Home = () => {
   return (
-    <div className="home">
-      <div className="logoContainer">
+    <PageContent>
+      <LogoContainer>
         <h1>Where is</h1>
-        <div className="textImageText">
+        <TextImageText>
           <h1>Mortal</h1>
-          <img className="image" src={Logo} alt="Mortal Kombat Dragon Logo" />
+          <Image src={Logo} alt="Mortal Kombat Dragon Logo" />
           <h1>Kombat</h1>
-        </div>
+        </TextImageText>
         <div>A Seek-And-Find Game</div>
-      </div>
+      </LogoContainer>
       <Settings />
       <Footer />
-    </div>
+    </PageContent>
   );
 };
 

@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './game.css';
-import { ReactComponent as Loader } from '../../../assets/loader.svg';
+import {
+  PageContent,
+  Loader,
+  MainContent,
+  Alert,
+  BackgroundImage,
+} from './game.styles';
 import Header from './../../header';
 import GameImage from '../../../assets/mkbackground.jpeg';
 import { useParams } from 'react-router-dom';
@@ -9,7 +14,7 @@ import { getRandomCharacters, useCharacters } from '../../../globalHelpers';
 
 const Game = () => {
   const { time, amountToFind } = useParams();
-  const [loaded, setLoaded] = useState(false);
+  const [Loading, setLoading] = useState(false);
   const [background, setBackground] = useState();
   const [positionXY, setPositionXY] = useState(false);
   const [alertText, setAlertText] = useState(false);
@@ -64,34 +69,23 @@ const Game = () => {
       image.src = GameImage;
       await image.decode();
       setBackground(image.src);
-      setLoaded(true);
+      setLoading(true);
     })();
   }, []);
   return (
-    <div className="gameScreen">
+    <PageContent>
       <Header charactersToFind={charactersToFind} start />
-      <Loader
-        className="loader"
-        style={!loaded ? { display: 'block' } : { display: 'none' }}
-      />
-      <div className="main">
-        {alertText && (
-          <h1
-            className="alertText"
-            style={{ backgroundColor: alertText.bgColor }}
-          >
-            {alertText.string}
-          </h1>
-        )}
-        <img
+      <Loader style={Loading ? { display: 'none' } : { display: 'block' }} />
+      <MainContent>
+        {alertText && <Alert $alertText={alertText}>{alertText.string}</Alert>}
+        <BackgroundImage
           ref={imgRef}
-          className="background"
           src={background}
           alt="Mortal Kombat Seek And Find Artwork"
-          style={loaded ? { display: 'block' } : { display: 'none' }}
+          style={Loading ? { display: 'block' } : { display: 'none' }}
           onClick={handleClick}
         />
-      </div>
+      </MainContent>
       {positionXY && (
         <Choices
           charactersToFind={charactersToFind}
@@ -100,7 +94,7 @@ const Game = () => {
           setAlertText={setAlertText}
         />
       )}
-    </div>
+    </PageContent>
   );
 };
 

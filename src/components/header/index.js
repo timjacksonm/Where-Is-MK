@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserSecret } from 'react-icons/fa';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
-import './header.css';
+import {
+  HeaderContent,
+  Navbar,
+  FindContainer,
+  Count,
+  CharacterList,
+  Card,
+} from './header.styles.js';
 
 const Header = ({ start, charactersToFind }) => {
   const [timer, setTimer] = useState('');
-  const [findCount, setFindCount] = useState('');
+  const [Remaining, setRemaining] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
   const open = () => setModalOpen(true);
@@ -13,14 +20,14 @@ const Header = ({ start, charactersToFind }) => {
   useEffect(() => {
     //start ? run timer && display remaining counter character to find
     const { characters } = charactersToFind;
-    setFindCount(characters.length);
+    setRemaining(characters.length);
   }, [start, charactersToFind]);
   return (
-    <div className="header">
-      <div className="navbar">
-        <div className="findTitle">
+    <HeaderContent>
+      <Navbar>
+        <FindContainer>
           <div>Find</div>
-          <div className="count">{findCount}</div>
+          <Count>{Remaining}</Count>
           <div>More</div>
           <FaUserSecret color="#000" size="2em" />
           {modalOpen ? (
@@ -28,22 +35,22 @@ const Header = ({ start, charactersToFind }) => {
           ) : (
             <MdExpandMore size="2em" onClick={open} />
           )}
-        </div>
+        </FindContainer>
         <div>{'timer'}</div>
-      </div>
+      </Navbar>
       {modalOpen && (
-        <div className="characters">
+        <CharacterList>
           {charactersToFind.characters.map(({ id, src, name }) => {
             return (
-              <div key={id}>
+              <Card key={id}>
                 <img src={src} alt={name} />
                 <div>{name}</div>
-              </div>
+              </Card>
             );
           })}
-        </div>
+        </CharacterList>
       )}
-    </div>
+    </HeaderContent>
   );
 };
 
