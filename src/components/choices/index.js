@@ -12,8 +12,7 @@ import verifyCharacterData from '../../firebase';
 
 const Choices = (props) => {
   const { charactersToFind, setPositionXY, setAlertText } = props;
-  const { targetPosition, modalPosition } = props.positionXY;
-  const { exactCoords } = props.positionXY;
+  const { targetPosition, modalPosition, exactCoords } = props.positionXY;
 
   const handleClick = async (id, name) => {
     const response = await verifyCharacterData(exactCoords, id);
@@ -35,8 +34,8 @@ const Choices = (props) => {
 
   return (
     <ModalContent>
-      <TargetIcon targetPosition={targetPosition} />
-      <CharactersContainer modalPosition={modalPosition}>
+      <TargetIcon $targetPosition={targetPosition} />
+      <CharactersContainer $modalPosition={modalPosition}>
         {charactersToFind.characters.map(({ id, name, src }) => {
           return (
             <Card key={id} onClick={() => handleClick(id, name)}>

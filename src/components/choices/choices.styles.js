@@ -4,14 +4,14 @@ import { ReactComponent as svg } from '../../assets/target.svg';
 export const ModalContent = styled.div``;
 export const TargetIcon = styled(svg)`
   position: absolute;
-  left: ${({ targetPosition }) => `${targetPosition.targetX}px`};
-  top: ${({ targetPosition }) => `${targetPosition.targetY}px`};
+  left: ${({ $targetPosition }) => `${$targetPosition.targetX}px`};
+  top: ${({ $targetPosition }) => `${$targetPosition.targetY}px`};
   width: 3.1em;
 `;
 export const CharactersContainer = styled.div`
   position: absolute;
-  left: ${({ modalPosition }) => `${modalPosition.modalX}px`};
-  top: ${({ modalPosition }) => `${modalPosition.modalY}px`};
+  left: ${({ $modalPosition }) => `${$modalPosition.modalX}px`};
+  top: ${({ $modalPosition }) => `${$modalPosition.modalY}px`};
   width: 22rem;
   min-height: 6.25em;
   max-height: 12.5em;
