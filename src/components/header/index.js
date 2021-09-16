@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserSecret } from 'react-icons/fa';
+import Timer from '../timer';
 import {
   HeaderContent,
   Navbar,
@@ -12,7 +13,6 @@ import {
 } from './header.styles.js';
 
 const Header = ({ start, charactersToFind, dropdownOpen, setDropdownOpen }) => {
-  const [timer, setTimer] = useState('');
   const [Remaining, setRemaining] = useState('');
 
   const open = () => setDropdownOpen(true);
@@ -36,7 +36,7 @@ const Header = ({ start, charactersToFind, dropdownOpen, setDropdownOpen }) => {
             <CloseButton size="2em" onClick={open} />
           )}
         </FindContainer>
-        <div>{'timer'}</div>
+        <Timer />
       </Navbar>
       {dropdownOpen && (
         <CharacterList>

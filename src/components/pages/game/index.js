@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, createContext } from 'react';
 import {
   PageContent,
   Loader,
@@ -11,14 +11,16 @@ import GameImage from '../../../assets/mkbackground.jpeg';
 import { useParams } from 'react-router-dom';
 import Choices from '../../choices';
 import { getRandomCharacters, useCharacters } from '../../../globalHelpers';
+export const GameStateContext = createContext();
 
 const Game = () => {
-  const { time, amountToFind } = useParams();
-  const [Loading, setLoading] = useState(false);
+  const { timeLimit, amountToFind } = useParams();
+  const [loading, setLoading] = useState(false);
   const [background, setBackground] = useState();
   const [positionXY, setPositionXY] = useState(false);
   const [alertText, setAlertText] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [time, setTime] = useState(0);
   const charactersToFind = useCharacters(
     getRandomCharacters(amountToFind, 1, 79)
   );
@@ -75,33 +77,44 @@ const Game = () => {
     })();
   }, []);
   return (
-    <PageContent>
-      <Header
-        charactersToFind={charactersToFind}
-        dropdownOpen={dropdownOpen}
-        setDropdownOpen={setDropdownOpen}
-        start
-      />
-      <Loader style={Loading ? { display: 'none' } : { display: 'block' }} />
-      <MainContent>
-        {alertText && <Alert $alertText={alertText}>{alertText.string}</Alert>}
-        <BackgroundImage
-          ref={imgRef}
-          src={background}
-          alt="Mortal Kombat Seek And Find Artwork"
-          style={Loading ? { display: 'block' } : { display: 'none' }}
-          onClick={handleClick}
-        />
-      </MainContent>
-      {positionXY && (
-        <Choices
+    <GameStateContext.Provider
+      value={{
+        loading: loading,
+        timeLimit: timeLimit,
+        remaining: charactersToFind,
+        timer: { time: time, setTime: (value) => setTime(value) },
+      }}
+    >
+      <PageContent>
+        <Header
           charactersToFind={charactersToFind}
-          positionXY={positionXY}
-          setPositionXY={setPositionXY}
-          setAlertText={setAlertText}
+          dropdownOpen={dropdownOpen}
+          setDropdownOpen={setDropdownOpen}
+          start
         />
-      )}
-    </PageContent>
+        <Loader style={loading ? { display: 'none' } : { display: 'block' }} />
+        <MainContent>
+          {alertText && (
+            <Alert $alertText={alertText}>{alertText.string}</Alert>
+          )}
+          <BackgroundImage
+            ref={imgRef}
+            src={background}
+            alt="Mortal Kombat Seek And Find Artwork"
+            style={loading ? { display: 'block' } : { display: 'none' }}
+            onClick={handleClick}
+          />
+        </MainContent>
+        {positionXY && (
+          <Choices
+            charactersToFind={charactersToFind}
+            positionXY={positionXY}
+            setPositionXY={setPositionXY}
+            setAlertText={setAlertText}
+          />
+        )}
+      </PageContent>
+    </GameStateContext.Provider>
   );
 };
 
