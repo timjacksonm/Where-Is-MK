@@ -24,6 +24,7 @@ const Game = () => {
   const charactersToFind = useCharacters(
     getRandomCharacters(amountToFind, 1, 79)
   );
+  const [allFound, setAllFound] = useState(false);
 
   const imgRef = useRef();
 
@@ -68,6 +69,12 @@ const Game = () => {
   };
 
   useEffect(() => {
+    if (charactersToFind.characters.length === 0) {
+      setAllFound(true);
+    }
+  }, [charactersToFind]);
+
+  useEffect(() => {
     (async function loadImage() {
       const image = new Image();
       image.src = GameImage;
@@ -76,12 +83,13 @@ const Game = () => {
       setLoading(true);
     })();
   }, []);
+
   return (
     <GameStateContext.Provider
       value={{
         loading: loading,
         timeLimit: timeLimit,
-        remaining: charactersToFind,
+        allFound: allFound,
         timer: { time: time, setTime: (value) => setTime(value) },
       }}
     >
@@ -90,7 +98,6 @@ const Game = () => {
           charactersToFind={charactersToFind}
           dropdownOpen={dropdownOpen}
           setDropdownOpen={setDropdownOpen}
-          start
         />
         <Loader style={loading ? { display: 'none' } : { display: 'block' }} />
         <MainContent>

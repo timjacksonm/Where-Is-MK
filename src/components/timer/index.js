@@ -1,20 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { GameStateContext } from '../pages/game';
 import { TimerText } from './timer.styles';
 import Stopwatch from './stopwatch';
 import Countdown from './countdown';
 
-const Timer = ({ time, setTime, characters }) => {
-  const [allFound, setAllFound] = useState(false);
+const Timer = () => {
   const gameState = useContext(GameStateContext);
-  const { loading, remaining, timer, timeLimit } = gameState;
-
-  useEffect(() => {
-    if (remaining.characters.length === 0) {
-      setAllFound(true);
-    }
-  }, [remaining]);
-
+  const { loading, timer, timeLimit, allFound } = gameState;
+  //timeLimit can be '5', '10' or 'none'
+  //isNaN checks for 'none' ? mount stopwatch : mount countdown
   return (
     <TimerText>
       {isNaN(Number(timeLimit)) ? (
