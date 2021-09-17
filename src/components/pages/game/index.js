@@ -21,10 +21,10 @@ const Game = () => {
   const [alertText, setAlertText] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [time, setTime] = useState(0);
+  const [stopGame, setStopGame] = useState(false);
   const charactersToFind = useCharacters(
     getRandomCharacters(amountToFind, 1, 79)
   );
-  const [allFound, setAllFound] = useState(false);
 
   const imgRef = useRef();
 
@@ -70,7 +70,7 @@ const Game = () => {
 
   useEffect(() => {
     if (charactersToFind.characters.length === 0) {
-      setAllFound(true);
+      setStopGame(true);
     }
   }, [charactersToFind]);
 
@@ -89,7 +89,10 @@ const Game = () => {
       value={{
         loading: loading,
         timeLimit: timeLimit,
-        allFound: allFound,
+        game: {
+          stopGame: stopGame,
+          setStopGame: (value) => setStopGame(value),
+        },
         timer: { time: time, setTime: (value) => setTime(value) },
       }}
     >

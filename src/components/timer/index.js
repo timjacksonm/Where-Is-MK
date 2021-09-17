@@ -6,15 +6,21 @@ import Countdown from './countdown';
 
 const Timer = () => {
   const gameState = useContext(GameStateContext);
-  const { loading, timer, timeLimit, allFound } = gameState;
+  const { loading, timer, timeLimit } = gameState;
+  const { stopGame, setStopGame } = gameState.game;
   //timeLimit can be '5', '10' or 'none'
   //isNaN checks for 'none' ? mount stopwatch : mount countdown
   return (
     <TimerText>
       {isNaN(Number(timeLimit)) ? (
-        <Stopwatch start={loading} stop={allFound} timer={timer} />
+        <Stopwatch start={loading} stop={stopGame} timer={timer} />
       ) : (
-        <Countdown start={loading} timer={timer} />
+        <Countdown
+          start={loading}
+          stop={stopGame}
+          setStopGame={setStopGame}
+          duration={timeLimit}
+        />
       )}
     </TimerText>
   );

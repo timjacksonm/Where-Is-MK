@@ -20,7 +20,7 @@ const Stopwatch = ({ start, stop, timer }) => {
   }, [stop, timer, timeElapsed]);
 
   useEffect(() => {
-    //timer functionality - format using date-fns
+    //timer functionality - counts up from 0 until game stops
     let interval;
     if (start && !stop) {
       interval = setInterval(() => {
