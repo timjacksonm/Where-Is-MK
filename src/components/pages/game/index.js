@@ -75,6 +75,23 @@ const Game = () => {
   }, [charactersToFind]);
 
   useEffect(() => {
+    if (stopGame) {
+      setTimeout(() => {
+        setAlertText({ string: 'Game Over!', bgColor: '#006400' });
+      }, 2000);
+      // setTimeout(() => {
+      //   setAlertText({
+      //     string: 'Redirecting to Leaderboard...',
+      //     bgColor: '#006400',
+      //   });
+      // }, 4000);
+      // setTimeout(() => {
+      //   window.location.replace(`#/results/${timeLimit}/${amountToFind}/`);
+      // }, 6000);
+    }
+  }, [stopGame]);
+
+  useEffect(() => {
     (async function loadImage() {
       const image = new Image();
       image.src = GameImage;

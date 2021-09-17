@@ -8,6 +8,9 @@ export const PageContent = styled.div`
   background-color: #000;
 `;
 export const Loader = styled(svg)`
+  position: fixed;
+  top: 112px;
+  z-index: 1;
   align-self: center;
 `;
 export const MainContent = styled.div`

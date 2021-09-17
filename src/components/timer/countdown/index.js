@@ -31,7 +31,7 @@ const Countdown = ({ start, stop, setStopGame, duration }) => {
     };
   }, [start, stop, setStopGame, startTime, timeElapsed]);
 
-  return <div>{timeElapsed}</div>;
+  return <div>{timeElapsed ? timeElapsed : '00:00:00'}</div>;
 };
 
 export default Countdown;
