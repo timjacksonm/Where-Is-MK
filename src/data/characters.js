@@ -92,7 +92,7 @@ const characters = [
   { id: 11, name: 'Darrius', src: Darrius },
   { id: 12, name: 'Drahmin', src: Drahmin },
   { id: 13, name: 'DVorah', src: DVorah },
-  { id: 14, name: 'EdBoon', src: EdBoon },
+  { id: 14, name: 'Ed Boon', src: EdBoon },
   { id: 15, name: 'Ermac', src: Ermac },
   { id: 16, name: 'Erron Black', src: ErronBlack },
   { id: 17, name: 'Ferra & Torr', src: FerraAndTorr },

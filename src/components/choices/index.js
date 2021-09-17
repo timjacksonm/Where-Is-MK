@@ -9,6 +9,7 @@ import {
   Name,
 } from './choices.styles';
 import verifyCharacterData from '../../firebase';
+let timeoutID;
 
 const Choices = (props) => {
   const { charactersToFind, setPositionXY, setAlertText } = props;
@@ -16,19 +17,17 @@ const Choices = (props) => {
 
   const handleClick = async (id, name) => {
     const response = await verifyCharacterData(exactCoords, id);
+    clearTimeout(timeoutID);
     if (response) {
       setAlertText({ string: `You found ${name}`, bgColor: '#006400' });
-      setTimeout(() => {
-        setAlertText(false);
-      }, 2000);
       charactersToFind.removeById(id);
     }
     if (!response) {
       setAlertText({ string: `Keep looking!`, bgColor: '#ea1a30' });
-      setTimeout(() => {
-        setAlertText(false);
-      }, 2000);
     }
+    timeoutID = setTimeout(() => {
+      setAlertText(false);
+    }, 2000);
     setPositionXY(false);
   };
 

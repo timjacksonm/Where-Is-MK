@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 
 export const HeaderContent = styled.div`
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: #ff9f00;
-  border-bottom: 1em solid #000;
   letter-spacing: 1px;
 `;
 export const Navbar = styled.div`
@@ -23,9 +25,11 @@ export const FindContainer = styled.div`
   }
 `;
 export const Count = styled.div`
-  font-size: 1.3em;
+  font-family: MKtitle;
+  font-size: 1.5em;
+  font-weight: 600;
+  letter-spacing: 2px;
   color: #ea1a30;
-  font-weight: 700;
 `;
 export const OpenButton = styled(MdExpandLess)`
   &:hover {

@@ -15,8 +15,10 @@ export const MainContent = styled.div`
 `;
 export const Alert = styled.h1`
   position: fixed;
+  top: 20px;
   left: 0;
   right: 0;
+  z-index: 1;
   padding: 0.5em;
   width: fit-content;
   font-family: roboto;
@@ -27,5 +29,6 @@ export const Alert = styled.h1`
   background-color: ${({ $alertText }) => $alertText.bgColor};
 `;
 export const BackgroundImage = styled.img`
+  margin-top: 112px;
   width: 100%;
 `;

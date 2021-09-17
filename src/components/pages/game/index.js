@@ -29,7 +29,7 @@ const Game = () => {
   const imgRef = useRef();
 
   const handleClick = (e) => {
-    const headerHeight = dropdownOpen ? 306.188 : 112;
+    const headerHeight = 112;
     const { pageX, pageY } = e;
     const exactCoords = {
       x: pageX / imgRef.current.offsetWidth,
