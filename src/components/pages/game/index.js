@@ -15,7 +15,7 @@ export const GameStateContext = createContext();
 
 const Game = () => {
   const { timeLimit, amountToFind } = useParams();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [background, setBackground] = useState();
   const [positionXY, setPositionXY] = useState(false);
   const [alertText, setAlertText] = useState(false);
@@ -97,7 +97,8 @@ const Game = () => {
       image.src = GameImage;
       await image.decode();
       setBackground(image.src);
-      setLoading(true);
+      setLoading(false);
+      setDropdownOpen(true);
     })();
   }, []);
 
@@ -119,7 +120,7 @@ const Game = () => {
           dropdownOpen={dropdownOpen}
           setDropdownOpen={setDropdownOpen}
         />
-        <Loader style={loading ? { display: 'none' } : { display: 'block' }} />
+        <Loader style={loading ? { display: 'block' } : { display: 'none' }} />
         <MainContent>
           {alertText && (
             <Alert $alertText={alertText}>{alertText.string}</Alert>
@@ -128,7 +129,7 @@ const Game = () => {
             ref={imgRef}
             src={background}
             alt="Mortal Kombat Seek And Find Artwork"
-            style={loading ? { display: 'block' } : { display: 'none' }}
+            style={loading ? { display: 'none' } : { display: 'block' }}
             onClick={handleClick}
           />
         </MainContent>

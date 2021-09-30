@@ -13,10 +13,10 @@ const Timer = () => {
   return (
     <TimerText>
       {isNaN(Number(timeLimit)) ? (
-        <Stopwatch start={loading} stop={stopGame} timer={timer} />
+        <Stopwatch start={!loading} stop={stopGame} timer={timer} />
       ) : (
         <Countdown
-          start={loading}
+          start={!loading}
           stop={stopGame}
           setStopGame={setStopGame}
           duration={timeLimit}
