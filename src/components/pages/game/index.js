@@ -79,17 +79,43 @@ const Game = () => {
       setTimeout(() => {
         setAlertText({ string: 'Game Over!', bgColor: '#006400' });
       }, 2000);
-      // setTimeout(() => {
-      //   setAlertText({
-      //     string: 'Redirecting to Leaderboard...',
-      //     bgColor: '#006400',
-      //   });
-      // }, 4000);
-      // setTimeout(() => {
-      //   window.location.replace(`#/results/${timeLimit}/${amountToFind}/`);
-      // }, 6000);
+      if (charactersToFind.characters.length === 0) {
+        setTimeout(() => {
+          setAlertText({
+            string: 'Challenge Complete',
+            bgColor: '#006400',
+          });
+        }, 4000);
+        setTimeout(() => {
+          setAlertText({
+            string: 'Redirecting to Leaderboard...',
+            bgColor: '#006400',
+          });
+        }, 6000);
+        setTimeout(() => {
+          window.location.replace(
+            `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
+          );
+        }, 10000);
+      } else {
+        setTimeout(() => {
+          setAlertText({
+            string: 'Challenge incomplete',
+            bgColor: '#ea1a30',
+          });
+        }, 4000);
+        setTimeout(() => {
+          setAlertText({
+            string: 'Redirecting to Home...',
+            bgColor: '#006400',
+          });
+        }, 6000);
+        setTimeout(() => {
+          window.location.replace(`#/`);
+        }, 10000);
+      }
     }
-  }, [stopGame]);
+  }, [stopGame, time]);
 
   useEffect(() => {
     (async function loadImage() {
@@ -130,7 +156,7 @@ const Game = () => {
             src={background}
             alt="Mortal Kombat Seek And Find Artwork"
             style={loading ? { display: 'none' } : { display: 'block' }}
-            onClick={handleClick}
+            onClick={!stopGame ? handleClick : () => console.log('game ended')}
           />
         </MainContent>
         {positionXY && (

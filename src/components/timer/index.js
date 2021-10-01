@@ -20,6 +20,7 @@ const Timer = () => {
           stop={stopGame}
           setStopGame={setStopGame}
           duration={timeLimit}
+          timer={timer}
         />
       )}
     </TimerText>

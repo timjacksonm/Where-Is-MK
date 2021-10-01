@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toDate, format, differenceInMilliseconds, addMinutes } from 'date-fns';
 
-const Countdown = ({ start, stop, setStopGame, duration }) => {
+const Countdown = ({ start, stop, setStopGame, duration, timer }) => {
   const [startTime, setStartTime] = useState(null);
   const [timeElapsed, setTimeElapsed] = useState();
 
@@ -31,6 +31,12 @@ const Countdown = ({ start, stop, setStopGame, duration }) => {
     };
   }, [start, stop, setStopGame, startTime, timeElapsed]);
 
+  useEffect(() => {
+    //once all characters have been found. setState from parent with current formatted time
+    if (stop) {
+      timer.setTime(timeElapsed);
+    }
+  }, [stop, timer, timeElapsed]);
   return <div>{timeElapsed ? timeElapsed : '00:00:00'}</div>;
 };
 
