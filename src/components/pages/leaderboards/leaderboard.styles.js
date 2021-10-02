@@ -18,7 +18,7 @@ export const OptionTitle = styled.h2`
 `;
 export const Container = styled.div`
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #ff9f00;
   color: #000;
   display: flex;
   flex-direction: column;

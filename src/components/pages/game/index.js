@@ -83,17 +83,17 @@ const Game = () => {
             bgColor: '#006400',
           });
         }, 2000);
-        setTimeout(() => {
-          setAlertText({
-            string: 'Redirecting to Leaderboard...',
-            bgColor: '#006400',
-          });
-        }, 4000);
-        setTimeout(() => {
-          window.location.replace(
-            `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
-          );
-        }, 8000);
+        // setTimeout(() => {
+        //   setAlertText({
+        //     string: 'Redirecting to Leaderboard...',
+        //     bgColor: '#006400',
+        //   });
+        // }, 4000);
+        // setTimeout(() => {
+        //   window.location.replace(
+        //     `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
+        //   );
+        // }, 8000);
       } else {
         setTimeout(() => {
           setAlertText({

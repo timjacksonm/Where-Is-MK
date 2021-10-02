@@ -13,7 +13,7 @@ const Router = () => {
         <Route path="/game/:timeLimit/:amountToFind">
           <Game />
         </Route>
-        <Route path="/leaderboards/:timeLimit/:amountToFind/:completionTime">
+        <Route path="/leaderboards/:timeLimit/:amountToFind">
           <Leaderboard />
         </Route>
       </Switch>
