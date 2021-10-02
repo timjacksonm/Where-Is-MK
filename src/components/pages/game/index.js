@@ -11,6 +11,7 @@ import GameImage from '../../../assets/mkbackground.jpeg';
 import { useParams } from 'react-router-dom';
 import Choices from '../../choices';
 import { getRandomCharacters, useCharacters } from '../../../globalHelpers';
+import SubmitScoreForm from '../../submitscoreform';
 export const GameStateContext = createContext();
 
 const Game = () => {
@@ -22,6 +23,7 @@ const Game = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [time, setTime] = useState(0);
   const [stopGame, setStopGame] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
   const charactersToFind = useCharacters(
     getRandomCharacters(amountToFind, 1, 79)
   );
@@ -68,6 +70,20 @@ const Game = () => {
     });
   };
 
+  const redirectToLeaderboard = () => {
+    setTimeout(() => {
+      setAlertText({
+        string: 'Redirecting to Leaderboard...',
+        bgColor: '#006400',
+      });
+    }, 1000);
+    setTimeout(() => {
+      window.location.replace(
+        `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
+      );
+    }, 5000);
+  };
+
   useEffect(() => {
     if (charactersToFind.characters.length === 0) {
       setStopGame(true);
@@ -83,17 +99,7 @@ const Game = () => {
             bgColor: '#006400',
           });
         }, 2000);
-        // setTimeout(() => {
-        //   setAlertText({
-        //     string: 'Redirecting to Leaderboard...',
-        //     bgColor: '#006400',
-        //   });
-        // }, 4000);
-        // setTimeout(() => {
-        //   window.location.replace(
-        //     `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
-        //   );
-        // }, 8000);
+        setOpenForm(true);
       } else {
         setTimeout(() => {
           setAlertText({
@@ -124,7 +130,6 @@ const Game = () => {
       setDropdownOpen(true);
     })();
   }, []);
-
   return (
     <GameStateContext.Provider
       value={{
@@ -147,6 +152,12 @@ const Game = () => {
         <MainContent>
           {alertText && (
             <Alert $alertText={alertText}>{alertText.string}</Alert>
+          )}
+          {openForm && (
+            <SubmitScoreForm
+              setOpenForm={setOpenForm}
+              redirectToLeaderboard={redirectToLeaderboard}
+            />
           )}
           <BackgroundImage
             ref={imgRef}
