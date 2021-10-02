@@ -76,43 +76,40 @@ const Game = () => {
 
   useEffect(() => {
     if (stopGame) {
-      setTimeout(() => {
-        setAlertText({ string: 'Game Over!', bgColor: '#006400' });
-      }, 2000);
       if (charactersToFind.characters.length === 0) {
         setTimeout(() => {
           setAlertText({
-            string: 'Challenge Complete',
+            string: 'Challenge Completed',
             bgColor: '#006400',
           });
-        }, 4000);
+        }, 2000);
         setTimeout(() => {
           setAlertText({
             string: 'Redirecting to Leaderboard...',
             bgColor: '#006400',
           });
-        }, 6000);
+        }, 4000);
         setTimeout(() => {
           window.location.replace(
             `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
           );
-        }, 10000);
+        }, 8000);
       } else {
         setTimeout(() => {
           setAlertText({
             string: 'Challenge incomplete',
             bgColor: '#ea1a30',
           });
-        }, 4000);
+        }, 2000);
         setTimeout(() => {
           setAlertText({
             string: 'Redirecting to Home...',
             bgColor: '#006400',
           });
-        }, 6000);
+        }, 4000);
         setTimeout(() => {
           window.location.replace(`#/`);
-        }, 10000);
+        }, 8000);
       }
     }
   }, [stopGame, time]);
