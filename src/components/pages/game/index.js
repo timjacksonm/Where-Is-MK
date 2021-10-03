@@ -78,9 +78,7 @@ const Game = () => {
       });
     }, 1000);
     setTimeout(() => {
-      window.location.replace(
-        `#/leaderboards/${timeLimit}/${amountToFind}/${time}`
-      );
+      window.location.replace(`#/leaderboards/${timeLimit}/${amountToFind}`);
     }, 5000);
   };
 

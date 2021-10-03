@@ -8,7 +8,7 @@ import {
   PortraitImage,
   Name,
 } from './choices.styles';
-import verifyCharacterData from '../../firebase';
+import { verifyCharacterData } from '../../firebase';
 let timeoutID;
 
 const Choices = (props) => {

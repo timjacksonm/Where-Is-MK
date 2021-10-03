@@ -12,17 +12,21 @@ import {
 
 const SubmitScoreForm = ({ redirectToLeaderboard, setOpenForm }) => {
   const [input, setInput] = useState({ value: '' });
+
   const handleChange = (e) => {
     setInput({ value: e.target.value });
   };
+
   const handleClose = () => {
     setOpenForm(false);
     redirectToLeaderboard();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleClose();
   };
+
   return (
     <ModalContainer>
       <CloseButton size="1.75em" onClick={handleClose} />

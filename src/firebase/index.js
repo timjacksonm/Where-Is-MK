@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-const verifyCharacterData = async (coords, id) => {
+export const verifyCharacterData = async (coords, id) => {
   const { x, y } = coords;
   const docRef = doc(db, 'where-is-mk', 'characters');
   const docSnap = await getDoc(docRef);
@@ -41,4 +41,13 @@ const verifyCharacterData = async (coords, id) => {
   }
 };
 
-export default verifyCharacterData;
+export const getLeaderboardData = async () => {
+  const docRef = doc(db, 'where-is-mk', 'leaderboards');
+  try {
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  } catch (error) {
+    // doc.data() will be undefined in this case
+    console.log(`No such document!`);
+  }
+};

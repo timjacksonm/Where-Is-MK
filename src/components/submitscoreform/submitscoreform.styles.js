@@ -21,6 +21,7 @@ export const CloseButton = styled(IoIosCloseCircle)`
   padding: 0.5em;
   justify-self: end;
   align-self: end;
+  color: #000;
   &:hover {
     color: #ea1a30;
     transform: scale(1.2);
