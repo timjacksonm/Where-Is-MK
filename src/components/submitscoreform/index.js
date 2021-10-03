@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { storeScoreToDb } from '../../firebase';
 import {
   ModalContainer,
   Name,
@@ -10,7 +10,13 @@ import {
   FormContainer,
 } from './submitscoreform.styles';
 
-const SubmitScoreForm = ({ redirectToLeaderboard, setOpenForm }) => {
+const SubmitScoreForm = ({
+  redirectToLeaderboard,
+  setOpenForm,
+  time,
+  timeLimit,
+  amountToFind,
+}) => {
   const [input, setInput] = useState({ value: '' });
 
   const handleChange = (e) => {
@@ -24,6 +30,7 @@ const SubmitScoreForm = ({ redirectToLeaderboard, setOpenForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    storeScoreToDb(`${timeLimit}${amountToFind}`, e.target[0].value, time);
     handleClose();
   };
 
@@ -42,9 +49,7 @@ const SubmitScoreForm = ({ redirectToLeaderboard, setOpenForm }) => {
             required
           />
         </Name>
-        <SubmitBtn type="submit" onClick={() => console.log('test')}>
-          Submit
-        </SubmitBtn>
+        <SubmitBtn type="submit">Submit</SubmitBtn>
       </FormContainer>
     </ModalContainer>
   );

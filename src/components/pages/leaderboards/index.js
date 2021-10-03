@@ -59,27 +59,24 @@ const Leaderboard = () => {
 
   useEffect(() => {
     (async function loadData() {
-      const data = await getLeaderboardData();
+      const data = await getLeaderboardData(`${filterTime}${filterFind}`);
       let sorted;
-      //if 5 or 10 minutes. sort by most time remaining
-      //if unlimited least amount of time
+      // if 5 or 10 minutes. sort by most time remaining
+      // if unlimited sort by least amount of time
       if (filterTime === '5' || filterTime === '10') {
-        sorted = Object.values(data[`${filterTime}${filterFind}`]).sort(
-          function (a, b) {
-            return a.time > b.time ? -1 : 1;
-          }
-        );
+        sorted = Object.values(data).sort(function (a, b) {
+          return a.time > b.time ? -1 : 1;
+        });
       }
       if (filterTime === 'none') {
-        sorted = Object.values(data[`${filterTime}${filterFind}`]).sort(
-          function (a, b) {
-            return a.time > b.time ? 1 : -1;
-          }
-        );
+        sorted = Object.values(data).sort(function (a, b) {
+          return a.time > b.time ? 1 : -1;
+        });
       }
       setLeaderboard(sorted);
     })();
   }, [filterTime, filterFind]);
+
   return (
     <PageContent>
       <Options>
@@ -134,9 +131,9 @@ const Leaderboard = () => {
         </Legend>
         <PlacementList>
           {leaderboard &&
-            leaderboard.map(({ name, time, id }, index) => {
+            leaderboard.map(({ name, time }, index) => {
               return (
-                <ListItem key={id}>
+                <ListItem key={name}>
                   <Rank>{`#${index + 1}`}</Rank>
                   <Name>{name}</Name>
                   <CompletionTime>{time}</CompletionTime>

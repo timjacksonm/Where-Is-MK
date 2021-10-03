@@ -41,13 +41,25 @@ export const verifyCharacterData = async (coords, id) => {
   }
 };
 
-export const getLeaderboardData = async () => {
-  const docRef = doc(db, 'where-is-mk', 'leaderboards');
+export const getLeaderboardData = async (index) => {
+  const docRef = doc(db, 'leaderboards', `${index}`);
   try {
     const docSnap = await getDoc(docRef);
     return docSnap.data();
   } catch (error) {
     // doc.data() will be undefined in this case
     console.log(`No such document!`);
+  }
+};
+
+export const storeScoreToDb = async (index, user, completionTime) => {
+  try {
+    const prevData = await getLeaderboardData(index);
+    await setDoc(doc(db, 'leaderboards', index), {
+      ...prevData,
+      [user]: { name: user, time: completionTime },
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

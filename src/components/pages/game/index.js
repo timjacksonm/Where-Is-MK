@@ -155,6 +155,9 @@ const Game = () => {
             <SubmitScoreForm
               setOpenForm={setOpenForm}
               redirectToLeaderboard={redirectToLeaderboard}
+              time={time}
+              timeLimit={timeLimit}
+              amountToFind={amountToFind}
             />
           )}
           <BackgroundImage
