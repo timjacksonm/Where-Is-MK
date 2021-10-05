@@ -3,7 +3,7 @@ import { device } from '../../globalHelpers';
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
 
 export const SettingsContainer = styled.form`
-  flex: 1;
+  flex: ${({ leaderboard }) => (leaderboard ? '0' : '1')};
   display: flex;
   flex-direction: column;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -24,7 +24,7 @@ export const RadioGroup = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 0.75em;
-  width: 20%;
+  width: 10em;
   height: 100%;
   flex: 1;
   border-right: ${({ divider }) => divider && '0.2em solid #b27c23'};

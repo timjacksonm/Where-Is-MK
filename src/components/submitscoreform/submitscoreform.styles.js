@@ -8,7 +8,7 @@ export const ModalContainer = styled.div`
   align-items: center;
   position: sticky;
   margin: 0 auto;
-  top: 25vh;
+  top: 26vh;
   padding: 1em;
   z-index: 1;
   background-color: #ff9f00;

@@ -19,7 +19,7 @@ export const MainContent = styled.div`
 `;
 export const Alert = styled.h1`
   position: fixed;
-  top: 16vh;
+  top: 17vh;
   left: 0;
   right: 0;
   z-index: 1;

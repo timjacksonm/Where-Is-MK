@@ -13,7 +13,7 @@ import {
   Alert,
 } from './settings.styles';
 
-const Settings = () => {
+const Settings = ({ leaderboard, setFilterFind, setFilterTime }) => {
   const group1 = {
     1: false,
     2: false,
@@ -39,17 +39,29 @@ const Settings = () => {
   };
 
   const handleChange = (e) => {
-    if (e.target.name === 'group1') {
-      setChecked({ ...checked, ...group1, [e.target.id]: true });
-      setTime(e.target.value);
+    if (!leaderboard) {
+      if (e.target.name === 'group1') {
+        setChecked({ ...checked, ...group1, [e.target.id]: true });
+        setTime(e.target.value);
+      }
+      if (e.target.name === 'group2') {
+        setChecked({ ...checked, ...group2, [e.target.id]: true });
+        setCharacters(e.target.value);
+      }
     }
-    if (e.target.name === 'group2') {
-      setChecked({ ...checked, ...group2, [e.target.id]: true });
-      setCharacters(e.target.value);
+    if (leaderboard) {
+      if (e.target.name === 'group1') {
+        setChecked({ ...checked, ...group1, [e.target.id]: true });
+        setFilterTime(e.target.value);
+      }
+      if (e.target.name === 'group2') {
+        setChecked({ ...checked, ...group2, [e.target.id]: true });
+        setFilterFind(e.target.value);
+      }
     }
   };
   return (
-    <SettingsContainer onSubmit={handleSubmit}>
+    <SettingsContainer onSubmit={handleSubmit} leaderboard>
       <ChoicesContainer>
         <RadioGroup divider>
           <Title checked={checked}>Time limit:</Title>
@@ -130,8 +142,8 @@ const Settings = () => {
           </RadioLabel>
         </RadioGroup>
       </ChoicesContainer>
-      {helperText && <Alert>{helperText}</Alert>}
-      <Start type="submit">Start</Start>
+      {!leaderboard && helperText && <Alert>{helperText}</Alert>}
+      {!leaderboard && <Start type="submit">Start</Start>}
     </SettingsContainer>
   );
 };

@@ -19,7 +19,6 @@ export const LogoContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: end;
-  margin-bottom: 1em;
   flex: 1;
   font-size: 1em;
   letter-spacing: 0.5em;
@@ -27,6 +26,7 @@ export const LogoContainer = styled.div`
 
   @media ${device.mobileL} {
     padding-top: 2em;
+    margin-bottom: 1em;
     justify-content: center;
   }
 `;

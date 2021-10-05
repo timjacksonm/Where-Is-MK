@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../../globalHelpers';
 
 export const PageContent = styled.div`
   height: 100vh;
@@ -6,29 +7,30 @@ export const PageContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const Options = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 1.5em auto;
-  width: 80vw;
-`;
-export const OptionTitle = styled.h2`
-  align-self: center;
-  padding-right: 1em;
+export const Title = styled.h1`
+  text-align: center;
+  color: #ff9f00;
 `;
 export const Container = styled.div`
-  margin: 0 auto;
   background-color: #ff9f00;
   color: #000;
   display: flex;
   flex-direction: column;
   border-radius: 0.5em;
   overflow-y: auto;
+  margin-top: 1em;
+  @media ${device.tablet} {
+    margin: 2em auto 0;
+  }
 `;
 export const PlacementList = styled.ul`
-  width: 80vw;
+  width: 100%;
   padding: 0;
   margin: 0;
+  @media ${device.tablet} {
+    width: 80vw;
+    max-width: 50em;
+  }
 `;
 export const Legend = styled.div`
   display: flex;

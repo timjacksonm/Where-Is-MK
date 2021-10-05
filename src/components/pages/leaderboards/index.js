@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './leaderboard.styles.js';
 import {
   PageContent,
+  Title,
   Options,
-  OptionTitle,
   Container,
   PlacementList,
   Legend,
@@ -12,50 +12,17 @@ import {
   Name,
   CompletionTime,
 } from './leaderboard.styles.js';
-import { Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
+import Settings from '../../settings/index.js';
 import { useParams } from 'react-router-dom';
 import { getLeaderboardData } from '../../../firebase/index.js';
 
 const Leaderboard = () => {
   const { timeLimit, amountToFind } = useParams();
 
-  const [filterTime, setFilteredTime] = useState(timeLimit);
-  const [filterFind, setFilteredFind] = useState(amountToFind);
+  const [filterTime, setFilterTime] = useState(timeLimit);
+  const [filterFind, setFilterFind] = useState(amountToFind);
 
   const [leaderboard, setLeaderboard] = useState(null);
-
-  let template = {
-    time: { 5: false, 10: false, none: false },
-    find: { 3: false, 10: false, all: false },
-  };
-
-  const [checked, setChecked] = useState(() => ({
-    time: { ...template.time, [timeLimit]: true },
-    find: { ...template.find, [amountToFind]: true },
-  }));
-
-  const handleRadioChange = (e) => {
-    if (e.target.name === 'Time') {
-      setChecked({
-        time: {
-          ...template.time,
-          [e.target.value]: true,
-        },
-        find: { ...checked.find },
-      });
-      setFilteredTime(e.target.value);
-    }
-    if (e.target.name === 'Find') {
-      setChecked({
-        time: { ...checked.time },
-        find: {
-          ...template.find,
-          [e.target.value]: true,
-        },
-      });
-      setFilteredFind(e.target.value);
-    }
-  };
 
   useEffect(() => {
     (async function loadData() {
@@ -79,50 +46,12 @@ const Leaderboard = () => {
 
   return (
     <PageContent>
-      <Options>
-        <RadioGroup name="Time" onChange={handleRadioChange} row>
-          <OptionTitle>Time</OptionTitle>
-          <FormControlLabel
-            value="5"
-            control={<Radio />}
-            label={'5 Minutes'}
-            checked={checked.time[5]}
-          />
-          <FormControlLabel
-            value="10"
-            control={<Radio />}
-            label="10 Minutes"
-            checked={checked.time[10]}
-          />
-          <FormControlLabel
-            value="none"
-            control={<Radio />}
-            label="Unlimited"
-            checked={checked.time['none']}
-          />
-        </RadioGroup>
-        <RadioGroup name="Find" onChange={handleRadioChange} row>
-          <OptionTitle>Find</OptionTitle>
-          <FormControlLabel
-            value="3"
-            control={<Radio />}
-            label="3"
-            checked={checked.find[3]}
-          />
-          <FormControlLabel
-            value="10"
-            control={<Radio />}
-            label="10"
-            checked={checked.find[10]}
-          />
-          <FormControlLabel
-            value="all"
-            control={<Radio />}
-            label="All"
-            checked={checked.find['all']}
-          />
-        </RadioGroup>
-      </Options>
+      <Title>Leaderboards</Title>
+      <Settings
+        setFilterTime={setFilterTime}
+        setFilterFind={setFilterFind}
+        leaderboard
+      />
       <Container>
         <Legend>
           <Rank>Rank</Rank>
