@@ -34,7 +34,9 @@ export const Title = styled.h4`
   align-self: center;
   text-align: center;
   color: ${({ checked }) =>
-    Object.values(checked).some((value) => value === true)
+    Object.values({ ...checked.group1, ...checked.group2 }).some(
+      (value) => value === true
+    )
       ? '#ff9f00'
       : '#b27c23'};
 `;
