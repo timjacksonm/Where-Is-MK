@@ -1,7 +1,21 @@
 import styled from 'styled-components';
 import { device } from '../../globalHelpers';
 import { ReactComponent as svg } from '../../assets/target.svg';
+import { IoIosCloseCircle } from 'react-icons/io';
 
+export const CloseButton = styled(IoIosCloseCircle)`
+  padding: 0.5em;
+  justify-self: end;
+  align-self: end;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #000;
+  &:hover {
+    color: #ea1a30;
+    transform: scale(1.2);
+  }
+`;
 export const ModalContent = styled.div``;
 export const TargetIcon = styled(svg)`
   position: absolute;

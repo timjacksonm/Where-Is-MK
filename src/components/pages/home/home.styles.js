@@ -18,6 +18,8 @@ export const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: end;
+  margin-bottom: 1em;
   flex: 1;
   font-size: 1em;
   letter-spacing: 0.5em;
@@ -39,7 +41,8 @@ export const TextImageText = styled.div`
   }
 `;
 export const Description = styled.div`
-  padding: 0.75em 0;
+  text-align: center;
+  padding: 1em 0;
 `;
 export const Image = styled.img`
   width: 40vw;

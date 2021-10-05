@@ -8,19 +8,24 @@ export const ModalContainer = styled.div`
   align-items: center;
   position: sticky;
   margin: 0 auto;
-  top: 15%;
+  top: 25vh;
+  padding: 1em;
   z-index: 1;
   background-color: #ff9f00;
   border: 0.2em solid #000;
   padding-bottom: 1.5em;
   border-radius: 0.5em;
   width: 50%;
+  max-width: 22em;
   hegiht: auto;
 `;
 export const CloseButton = styled(IoIosCloseCircle)`
   padding: 0.5em;
   justify-self: end;
   align-self: end;
+  position: absolute;
+  top: 0;
+  right: 0;
   color: #000;
   &:hover {
     color: #ea1a30;
@@ -31,14 +36,17 @@ export const Name = styled.div`
   text-align: center;
   width: 100%;
 `;
-export const Title = styled.div``;
+export const Title = styled.div`
+  text-align: center;
+  padding: 2em 0 1em;
+`;
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 export const TextInput = styled.input`
-  margin: 1.2em;
+  margin: 1em;
   line-height: 1.75em;
 `;
 export const SubmitBtn = styled.button`

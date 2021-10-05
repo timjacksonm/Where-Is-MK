@@ -7,6 +7,7 @@ import {
   PortraitContainer,
   PortraitImage,
   Name,
+  CloseButton,
 } from './choices.styles';
 import { verifyCharacterData } from '../../firebase';
 let timeoutID;
@@ -31,6 +32,11 @@ const Choices = (props) => {
     setPositionXY(false);
   };
 
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setPositionXY(null);
+  };
+
   return (
     <ModalContent>
       <TargetIcon $targetPosition={targetPosition} />
@@ -38,6 +44,7 @@ const Choices = (props) => {
         {charactersToFind.characters.map(({ id, name, src }) => {
           return (
             <Card key={id} onClick={() => handleClick(id, name)}>
+              <CloseButton size="1.5em" onClick={handleClose} />
               <PortraitContainer>
                 <PortraitImage src={src} alt={id} />
               </PortraitContainer>

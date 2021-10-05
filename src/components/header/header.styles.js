@@ -16,6 +16,9 @@ export const Navbar = styled.div`
   padding: 2em 0.5em;
   align-items: center;
   justify-content: space-between;
+  @media ${device.laptop} {
+    padding: 2em 4em;
+  }
 `;
 export const FindContainer = styled.div`
   display: flex;

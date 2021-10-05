@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../../globalHelpers';
 import { ReactComponent as svg } from '../../../assets/loader.svg';
 
 export const PageContent = styled.div`
@@ -18,7 +19,7 @@ export const MainContent = styled.div`
 `;
 export const Alert = styled.h1`
   position: fixed;
-  top: 20px;
+  top: 16vh;
   left: 0;
   right: 0;
   z-index: 1;
@@ -30,6 +31,9 @@ export const Alert = styled.h1`
   margin: auto;
   text-align: center;
   background-color: ${({ $alertText }) => $alertText.bgColor};
+  @media ${device.laptop} {
+    top: 20px;
+  }
 `;
 export const BackgroundImage = styled.img`
   margin-top: 112px;

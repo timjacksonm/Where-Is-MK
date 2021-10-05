@@ -16,7 +16,9 @@ export const ChoicesContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.5em auto;
+  align-self: center;
+  width: 100%;
+  max-width: 22em;
 `;
 export const RadioGroup = styled.div`
   display: flex;
@@ -31,7 +33,6 @@ export const Title = styled.h4`
   margin: 0;
   align-self: center;
   text-align: center;
-  min-width: 12em;
   color: ${({ checked }) =>
     Object.values(checked).some((value) => value === true)
       ? '#ff9f00'
@@ -47,7 +48,6 @@ export const Description = styled.p`
   flex: 1;
   text-align: center;
 `;
-// unchecked #b27c23 checked #ea1a30
 export const HiddenRadio = styled.input`
   position: absolute;
   opacity: 0;
@@ -83,7 +83,7 @@ export const Start = styled.button`
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.167;
-  margin: 0;
+  margin: 0.5em;
   outline: none;
   padding: 8px 0.8em;
   position: relative;
@@ -96,6 +96,9 @@ export const Start = styled.button`
   white-space: nowrap;
   &:hover {
     background-color: #ea1a30;
+  }
+  @media ${device.laptop} {
+    margin: 1em;
   }
 `;
 export const Alert = styled.div`
