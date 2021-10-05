@@ -84,6 +84,7 @@ const Game = () => {
 
   useEffect(() => {
     if (charactersToFind.characters.length === 0) {
+      setDropdownOpen(false);
       setStopGame(true);
     }
   }, [charactersToFind]);
@@ -116,7 +117,7 @@ const Game = () => {
         }, 8000);
       }
     }
-  }, [stopGame, time]);
+  }, [charactersToFind.characters.length, stopGame, time]);
 
   useEffect(() => {
     (async function loadImage() {

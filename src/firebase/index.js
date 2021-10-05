@@ -1,15 +1,7 @@
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { initializeApp } from 'firebase/app';
-import { updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  setDoc,
-} from 'firebase/firestore';
+import { getFirestore, getDoc, doc, setDoc } from 'firebase/firestore';
 
 // The Firebase config object contains unique, but non-secret identifiers for your Firebase project.
 // The content of the Firebase config file or object is considered public. Protected by Firebase Security Rules.
@@ -23,7 +15,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const db = getFirestore();
 

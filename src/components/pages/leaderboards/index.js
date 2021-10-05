@@ -3,7 +3,6 @@ import './leaderboard.styles.js';
 import {
   PageContent,
   Title,
-  Options,
   Container,
   PlacementList,
   Legend,
@@ -48,6 +47,8 @@ const Leaderboard = () => {
     <PageContent>
       <Title>Leaderboards</Title>
       <Settings
+        timeLimit={timeLimit}
+        amountToFind={amountToFind}
         setFilterTime={setFilterTime}
         setFilterFind={setFilterFind}
         leaderboard

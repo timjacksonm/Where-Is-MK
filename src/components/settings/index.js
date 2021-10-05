@@ -13,19 +13,32 @@ import {
   Alert,
 } from './settings.styles';
 
-const Settings = ({ leaderboard, setFilterFind, setFilterTime }) => {
+const Settings = ({
+  leaderboard,
+  timeLimit,
+  amountToFind,
+  setFilterFind,
+  setFilterTime,
+}) => {
   const group1 = {
-    1: false,
-    2: false,
-    3: false,
+    5: false,
+    10: false,
+    none: false,
   };
   const group2 = {
-    4: false,
-    5: false,
-    6: false,
+    3: false,
+    10: false,
+    all: false,
   };
 
-  const [checked, setChecked] = useState({ ...group1, ...group2 });
+  const [checked, setChecked] = useState(() =>
+    !leaderboard
+      ? { group1: group1, group2: group2 }
+      : {
+          group1: { ...group1, ...{ [timeLimit]: true } },
+          group2: { ...group2, ...{ [amountToFind]: true } },
+        }
+  );
   const [time, setTime] = useState('');
   const [characters, setCharacters] = useState('');
   const [helperText, setHelperText] = useState(' ');
@@ -41,61 +54,73 @@ const Settings = ({ leaderboard, setFilterFind, setFilterTime }) => {
   const handleChange = (e) => {
     if (!leaderboard) {
       if (e.target.name === 'group1') {
-        setChecked({ ...checked, ...group1, [e.target.id]: true });
+        setChecked({
+          group1: { ...group1, [e.target.id]: true },
+          group2: { ...checked.group2 },
+        });
         setTime(e.target.value);
       }
       if (e.target.name === 'group2') {
-        setChecked({ ...checked, ...group2, [e.target.id]: true });
+        setChecked({
+          group1: { ...checked.group1 },
+          group2: { ...group2, [e.target.id]: true },
+        });
         setCharacters(e.target.value);
       }
     }
     if (leaderboard) {
       if (e.target.name === 'group1') {
-        setChecked({ ...checked, ...group1, [e.target.id]: true });
+        setChecked({
+          group1: { ...group1, [e.target.id]: true },
+          group2: { ...checked.group2 },
+        });
         setFilterTime(e.target.value);
       }
       if (e.target.name === 'group2') {
-        setChecked({ ...checked, ...group2, [e.target.id]: true });
+        setChecked({
+          group1: { ...checked.group1 },
+          group2: { ...group2, [e.target.id]: true },
+        });
         setFilterFind(e.target.value);
       }
     }
   };
   return (
-    <SettingsContainer onSubmit={handleSubmit} leaderboard>
+    <SettingsContainer onSubmit={handleSubmit} leaderboard={leaderboard}>
       <ChoicesContainer>
         <RadioGroup divider>
           <Title checked={checked}>Time limit:</Title>
           <RadioLabel>
-            {checked[1] ? <Checked /> : <Unchecked />}
+            {checked.group1[5] ? <Checked /> : <Unchecked />}
             <Description>5 Minutes</Description>
             <HiddenRadio
-              id="1"
+              id="5"
               type="radio"
-              checked={checked[1]}
+              checked={checked.group1[5]}
               onChange={handleChange}
               name="group1"
               value="5"
             />
           </RadioLabel>
           <RadioLabel>
-            {checked[2] ? <Checked /> : <Unchecked />}
+            {checked.group1[10] ? <Checked /> : <Unchecked />}
             <Description>10 Minutes</Description>
             <HiddenRadio
-              id="2"
+              id="10"
               type="radio"
-              checked={checked[2]}
+              checked={checked.group1[10]}
               onChange={handleChange}
               name="group1"
               value="10"
             />
           </RadioLabel>
           <RadioLabel>
-            {checked[3] ? <Checked /> : <Unchecked />}
+            {checked.group1['none'] ? <Checked /> : <Unchecked />}
             <Description>Unlimited</Description>
             <HiddenRadio
-              id="3"
+              id="none"
               type="radio"
-              checked={checked[3]}
+              checked={checked.group1['none']}
               onChange={handleChange}
               name="group1"
               value="none"
@@ -105,36 +130,36 @@ const Settings = ({ leaderboard, setFilterFind, setFilterTime }) => {
         <RadioGroup>
           <Title checked={checked}>Characters:</Title>
           <RadioLabel>
-            {checked[4] ? <Checked /> : <Unchecked />}
+            {checked.group2[3] ? <Checked /> : <Unchecked />}
             <Description>Find 3</Description>
             <HiddenRadio
-              id="4"
+              id="3"
               type="radio"
-              checked={checked[4]}
+              checked={checked.group2[3]}
               onChange={handleChange}
               name="group2"
               value="3"
             />
           </RadioLabel>
           <RadioLabel>
-            {checked[5] ? <Checked /> : <Unchecked />}
+            {checked.group2[10] ? <Checked /> : <Unchecked />}
             <Description>Find 10</Description>
             <HiddenRadio
-              id="5"
+              id="10"
               type="radio"
-              checked={checked[5]}
+              checked={checked.group2[10]}
               onChange={handleChange}
               name="group2"
               value="10"
             />
           </RadioLabel>
           <RadioLabel>
-            {checked[6] ? <Checked /> : <Unchecked />}
+            {checked.group2['all'] ? <Checked /> : <Unchecked />}
             <Description>Find All</Description>
             <HiddenRadio
-              id="6"
+              id="all"
               type="radio"
-              checked={checked[6]}
+              checked={checked.group2['all']}
               onChange={handleChange}
               name="group2"
               value="all"
