@@ -13,7 +13,7 @@ import {
   Alert,
 } from './settings.styles';
 
-const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
+const Settings = () => {
   const group1 = {
     1: false,
     2: false,
@@ -26,8 +26,19 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
   };
 
   const [checked, setChecked] = useState({ ...group1, ...group2 });
+  const [time, setTime] = useState('');
+  const [characters, setCharacters] = useState('');
+  const [helperText, setHelperText] = useState(' ');
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (time && characters) {
+      window.location.href = `${window.location.href}game/${time}/${characters}`;
+    }
+    setHelperText('Please finish selecting your settings');
+  };
+
+  const handleChange = (e) => {
     if (e.target.name === 'group1') {
       setChecked({ ...checked, ...group1, [e.target.id]: true });
       setTime(e.target.value);
@@ -49,7 +60,7 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
               id="1"
               type="radio"
               checked={checked[1]}
-              onChange={handleClick}
+              onChange={handleChange}
               name="group1"
               value="5"
             />
@@ -61,7 +72,7 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
               id="2"
               type="radio"
               checked={checked[2]}
-              onChange={handleClick}
+              onChange={handleChange}
               name="group1"
               value="10"
             />
@@ -73,7 +84,7 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
               id="3"
               type="radio"
               checked={checked[3]}
-              onChange={handleClick}
+              onChange={handleChange}
               name="group1"
               value="none"
             />
@@ -88,7 +99,7 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
               id="4"
               type="radio"
               checked={checked[4]}
-              onChange={handleClick}
+              onChange={handleChange}
               name="group2"
               value="3"
             />
@@ -100,7 +111,7 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
               id="5"
               type="radio"
               checked={checked[5]}
-              onChange={handleClick}
+              onChange={handleChange}
               name="group2"
               value="10"
             />
@@ -112,7 +123,7 @@ const Settings = ({ handleSubmit, setTime, setCharacters, helperText }) => {
               id="6"
               type="radio"
               checked={checked[6]}
-              onChange={handleClick}
+              onChange={handleChange}
               name="group2"
               value="all"
             />

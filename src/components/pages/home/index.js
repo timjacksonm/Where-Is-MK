@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   PageContent,
   LogoContainer,
@@ -12,20 +12,6 @@ import Settings from '../../settings';
 import Logo from '../../../assets/Mortal-Kombat-logo.png';
 
 const Home = () => {
-  const [time, setTime] = useState('');
-  const [characters, setCharacters] = useState('');
-  const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState(' ');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (time && characters) {
-      window.location.href = `${window.location.href}game/${time}/${characters}`;
-    }
-    setError(true);
-    console.log(true);
-    setHelperText('Please finish selecting your settings');
-  };
   return (
     <PageContent>
       <LogoContainer>
@@ -37,12 +23,7 @@ const Home = () => {
         </TextImageText>
         <Description>A Seek-And-Find Game</Description>
       </LogoContainer>
-      <Settings
-        handleSubmit={handleSubmit}
-        setTime={setTime}
-        setCharacters={setCharacters}
-        helperText={helperText}
-      />
+      <Settings />
       <Footer />
     </PageContent>
   );
