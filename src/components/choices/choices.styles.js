@@ -1,21 +1,30 @@
 import styled from 'styled-components';
+import { device } from '../../globalHelpers';
 import { ReactComponent as svg } from '../../assets/target.svg';
 
 export const ModalContent = styled.div``;
 export const TargetIcon = styled(svg)`
   position: absolute;
-  left: ${({ $targetPosition }) => `${$targetPosition.targetX}px`};
-  top: ${({ $targetPosition }) => `${$targetPosition.targetY}px`};
-  width: 3.1em;
+  left: ${({ $targetPosition }) => `${$targetPosition.targetX + 12}px`};
+  top: ${({ $targetPosition }) => `${$targetPosition.targetY + 12}px`};
+  width: 1.55em;
+  @media ${device.laptop} {
+    width: 3.1em;
+    left: ${({ $targetPosition }) => `${$targetPosition.targetX}px`};
+    top: ${({ $targetPosition }) => `${$targetPosition.targetY}px`};
+  }
 `;
 export const CharactersContainer = styled.div`
-  position: absolute;
-  left: ${({ $modalPosition }) => `${$modalPosition.modalX}px`};
-  top: ${({ $modalPosition }) => `${$modalPosition.modalY}px`};
-  width: 22rem;
-  min-height: 6.25em;
-  max-height: 12.5em;
   overflow-y: auto;
+  @media ${device.laptop} {
+    position: absolute;
+    left: ${({ $modalPosition }) => `${$modalPosition.modalX}px`};
+    top: ${({ $modalPosition }) => `${$modalPosition.modalY}px`};
+    width: 22rem;
+    min-height: 6.25em;
+    max-height: 12.5em;
+    overflow-y: auto;
+  }
 `;
 export const Card = styled.div`
   display: flex;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../globalHelpers';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 
 export const HeaderContent = styled.div`
@@ -12,7 +13,7 @@ export const HeaderContent = styled.div`
 `;
 export const Navbar = styled.div`
   display: flex;
-  padding: 2em 4em;
+  padding: 2em 0.5em;
   align-items: center;
   justify-content: space-between;
 `;
@@ -50,11 +51,11 @@ export const CharacterList = styled.div`
   overflow-y: hidden;
   border-top: 0.2em solid #000;
   background-image: linear-gradient(#ff9f00 56%, #57211d);
+  padding: 0.5em 0;
 `;
 export const Card = styled.div`
   display: flex;
   justify-content: center;
-  padding: 2em 0.5em 0;
   height: 10em;
   min-width: 14em;
   & img {
