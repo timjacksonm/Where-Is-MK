@@ -17,7 +17,7 @@
 ## Screenshots
 
 <details>
-  <summary>Show Image</summary>
+  <summary>Show Images</summary>
 
 <image src="/src/assets/demogif1.gif">
 
@@ -81,8 +81,8 @@ Leaderboard Page Ipad
 
 ## Goals:
 
-- [✔️] Plan our folder and file structure in depth before starting. (Whiteboard)
-- [✔️] Use Firebase Firestore with project - learning and getting familiar
+- [✔️] Plan out folder and file structure in depth before starting. (Whiteboard)
+- [✔️] Use Firebase Firestore with project - learn and getting familiar with using a BaaS
 - [✔️] Re-use components when possible in project
 - [✔️] Get more familiar with styled components and passing props down to be used in css
 - [✔️] Have many different options to play the game and lots of data!
