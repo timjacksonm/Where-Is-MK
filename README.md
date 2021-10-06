@@ -107,3 +107,38 @@ I dreaded planning out how I was going to add mobile responsiveness to the proje
    <p>
 I hope you enjoy. Please leave a name to your score if you complete a challenge!
    </p>
+
+## Author
+
+👤 **Tim Jackson**
+
+- Github: [@timjacksonm](https://github.com/timjacksonm)
+- Twitter [@timjacksonm](https://twitter.com/timjacksonm)
+- LinkedIn [@timjacksonm](https://linkedin.com/in/timjacksonm)
+
+## Credits
+
+This project idea was a part of my studies at The Odin Project's curriculum. You can see the lesson <a href="https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/where-s-waldo-a-photo-tagging-app" target="_blank">here</a>!
+
+## Attribution
+
+   <p>
+      <a href="https://www.behance.net/gallery/99271971/Mortal-Kombat-Wheres-Scorpion-illustration">
+      Mortal Kombat Poster used as background and individual characters. Created by Gus Morais
+      </a>
+   </p>
+   <p>
+      <a href="https://1000logos.net/mortal-kombat-logo/">
+      The Mortal Kombat emblem made by 1000logos.net
+      </a>
+   </p>
+   <p>
+      <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">
+      Target Icon made by Vectors Market from www.flaticon.com
+      </a>
+   </p>
+   <p>
+      <a href="https://codepen.io/nikhil8krishnan">
+      Loader Icon made by Nikhil Krishnan
+      </a>
+   </p>
