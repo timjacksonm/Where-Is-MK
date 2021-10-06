@@ -113,7 +113,7 @@ I hope you enjoy. Please leave a name to your score if you complete a challenge!
 👤 **Tim Jackson**
 
 - Github: [@timjacksonm](https://github.com/timjacksonm)
-- Twitter [@timjacksonm](https://twitter.com/timjacksonm)
+- Twitter [@TimJacksonMN](https://twitter.com/TimJacksonMN)
 - LinkedIn [@timjacksonm](https://linkedin.com/in/timjacksonm)
 
 ## Credits
