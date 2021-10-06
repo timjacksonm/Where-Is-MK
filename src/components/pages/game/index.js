@@ -25,7 +25,7 @@ const Game = () => {
   const [stopGame, setStopGame] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const charactersToFind = useCharacters(
-    getRandomCharacters(amountToFind, 1, 79)
+    getRandomCharacters(amountToFind, 1, 79).sort((a, b) => a.id - b.id)
   );
 
   const imgRef = useRef();

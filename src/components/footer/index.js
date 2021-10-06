@@ -6,7 +6,7 @@ import { Wrapper, MyInfo, LinkContainer, Link } from './footer.styles';
 const Footer = () => {
   return (
     <Wrapper>
-      <div>Attributions</div>
+      <Link href="#/attributions">Attributions</Link>
       <MyInfo>
         <div>Created by TJ</div>
         <LinkContainer>

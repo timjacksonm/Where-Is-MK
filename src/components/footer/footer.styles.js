@@ -21,11 +21,14 @@ export const LinkContainer = styled.div`
 export const Link = styled.a`
   text-decoration: none;
   margin: 0 0.1em;
+  cursor: pointer;
+  color: #fff;
   & svg {
     width: fit-content;
     height: 2.5vh;
   }
   &:hover {
+    color: #ea1a30;
     & svg path {
       fill: #ea1a30;
     }
