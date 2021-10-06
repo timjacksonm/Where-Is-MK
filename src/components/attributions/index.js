@@ -26,7 +26,7 @@ const Attributions = () => {
         <BackBtn onClick={handleClick} size="2em" />
         <Link href="https://www.behance.net/gallery/99271971/Mortal-Kombat-Wheres-Scorpion-illustration">
           Mortal Kombat Poster used as background and individual characters.
-          Created by Gusmorais
+          Created by Gus Morais
         </Link>
         <Link href="https://1000logos.net/mortal-kombat-logo/">
           The Mortal Kombat emblem made by 1000logos.net
