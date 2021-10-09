@@ -10,7 +10,7 @@ import Header from './../../header';
 import GameImage from '../../../assets/mkbackground.jpeg';
 import { useParams } from 'react-router-dom';
 import Choices from '../../choices';
-import { getRandomCharacters, useCharacters } from '../../../globalHelpers';
+import { useCharacters } from '../../../globalHelpers';
 import SubmitScoreForm from '../../submitscoreform';
 export const GameStateContext = createContext();
 
@@ -24,50 +24,50 @@ const Game = () => {
   const [time, setTime] = useState(0);
   const [stopGame, setStopGame] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const charactersToFind = useCharacters(
-    getRandomCharacters(amountToFind, 1, 79).sort((a, b) => a.id - b.id)
-  );
-
+  const charactersToFind = useCharacters(amountToFind);
   const imgRef = useRef();
 
-  const handleClick = (e) => {
+  const setTargetAndModalPosition = (e) => {
     const headerHeight = 112;
     const { pageX, pageY } = e;
     const exactCoords = {
       x: pageX / imgRef.current.offsetWidth,
       y: (pageY - headerHeight) / imgRef.current.offsetHeight,
     };
-    const targetPosition = { targetX: e.pageX - 25, targetY: e.pageY - 25 };
+    const targetPosition = { targetX: pageX - 25, targetY: e.pageY - 25 };
+
     const { availableSpaceX, availableSpaceY } = {
       availableSpaceX: imgRef.current.offsetWidth - pageX,
       availableSpaceY: imgRef.current.offsetHeight - pageY,
     };
-    let modalPosition = { modalX: e.pageX + 30, modalY: pageY + 25 };
-    //modal width:350px, height: 200px
-    //availableSpace < width || height ? change choices modal position so it stays visable on page : keep the same
-    if (availableSpaceX < 350 && availableSpaceY > 200) {
-      modalPosition = {
-        modalX: e.pageX - 375,
-        modalY: e.pageY + 25,
-      };
+    let modalPosition = { modalX: pageX + 30, modalY: pageY + 25 };
+    //modalPosition default position set. The position is adjusted if the modal partially appears off screen with the below if statement.
+    //modal exact size: width:350px, height:200px
+    if (!stopGame) {
+      if (availableSpaceX < 350 && availableSpaceY > 200) {
+        modalPosition = {
+          modalX: pageX - 375,
+          modalY: pageY + 25,
+        };
+      }
+      if (availableSpaceX > 350 && availableSpaceY < 200) {
+        modalPosition = {
+          modalX: pageX + 25,
+          modalY: pageY - 230,
+        };
+      }
+      if (availableSpaceX < 350 && availableSpaceY < 200) {
+        modalPosition = {
+          modalX: pageX - 375,
+          modalY: pageY - 230,
+        };
+      }
+      setPositionXY({
+        exactCoords,
+        modalPosition,
+        targetPosition,
+      });
     }
-    if (availableSpaceX > 350 && availableSpaceY < 200) {
-      modalPosition = {
-        modalX: e.pageX + 25,
-        modalY: e.pageY - 230,
-      };
-    }
-    if (availableSpaceX < 350 && availableSpaceY < 200) {
-      modalPosition = {
-        modalX: e.pageX - 375,
-        modalY: e.pageY - 230,
-      };
-    }
-    setPositionXY({
-      exactCoords,
-      modalPosition,
-      targetPosition,
-    });
   };
 
   const redirectToLeaderboard = () => {
@@ -90,32 +90,31 @@ const Game = () => {
   }, [charactersToFind]);
 
   useEffect(() => {
-    if (stopGame) {
-      if (charactersToFind.characters.length === 0) {
-        setTimeout(() => {
-          setAlertText({
-            string: 'Challenge Completed',
-            bgColor: '#006400',
-          });
-        }, 2000);
-        setOpenForm(true);
-      } else {
-        setTimeout(() => {
-          setAlertText({
-            string: 'Challenge incomplete',
-            bgColor: '#ea1a30',
-          });
-        }, 2000);
-        setTimeout(() => {
-          setAlertText({
-            string: 'Redirecting to Home...',
-            bgColor: '#006400',
-          });
-        }, 4000);
-        setTimeout(() => {
-          window.location.replace(`#/`);
-        }, 8000);
-      }
+    if (stopGame && charactersToFind.characters.length === 0) {
+      setTimeout(() => {
+        setAlertText({
+          string: 'Challenge Completed',
+          bgColor: '#006400',
+        });
+      }, 2000);
+      setOpenForm(true);
+    }
+    if (stopGame && charactersToFind.characters.length > 0) {
+      setTimeout(() => {
+        setAlertText({
+          string: 'Challenge incomplete',
+          bgColor: '#ea1a30',
+        });
+      }, 2000);
+      setTimeout(() => {
+        setAlertText({
+          string: 'Redirecting to Home...',
+          bgColor: '#006400',
+        });
+      }, 4000);
+      setTimeout(() => {
+        window.location.replace(`#/`);
+      }, 8000);
     }
   }, [charactersToFind.characters.length, stopGame, time]);
 
@@ -166,7 +165,7 @@ const Game = () => {
             src={background}
             alt="Mortal Kombat Seek And Find Artwork"
             style={loading ? { display: 'none' } : { display: 'block' }}
-            onClick={!stopGame ? handleClick : () => console.log('game ended')}
+            onClick={setTargetAndModalPosition}
           />
         </MainContent>
         {positionXY && (

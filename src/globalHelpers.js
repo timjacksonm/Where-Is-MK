@@ -17,12 +17,15 @@ export const getRandomCharacters = (characters, min, max) => {
     }
   } while (array.length < length);
 
-  return array // returns array without duplicates & sorts array by character.id (1-79)
-    .map((number) => MasterList.find((object) => object.id === number));
+  return array.map((number) =>
+    MasterList.find((object) => object.id === number)
+  );
 };
 
-export const useCharacters = (initial) => {
-  const [characters, setCharacters] = useState(initial);
+export const useCharacters = (amountToFind) => {
+  const [characters, setCharacters] = useState(
+    getRandomCharacters(amountToFind, 1, 79).sort((a, b) => a.id - b.id)
+  );
   return {
     characters,
     setCharacters,
