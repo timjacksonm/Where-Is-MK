@@ -30,7 +30,7 @@ const Settings = ({
     10: false,
     all: false,
   };
-
+  //component is reisued on leaderboard. !leaderboard is referring to settings on home page
   const [checked, setChecked] = useState(() =>
     !leaderboard
       ? { group1: group1, group2: group2 }
@@ -50,39 +50,32 @@ const Settings = ({
     }
     setHelperText('Please finish selecting your settings');
   };
-
-  const handleChange = (e) => {
-    if (!leaderboard) {
-      if (e.target.name === 'group1') {
-        setChecked({
-          group1: { ...group1, [e.target.id]: true },
-          group2: { ...checked.group2 },
-        });
-        setTime(e.target.value);
-      }
-      if (e.target.name === 'group2') {
-        setChecked({
-          group1: { ...checked.group1 },
-          group2: { ...group2, [e.target.id]: true },
-        });
-        setCharacters(e.target.value);
-      }
+  const setStateWithValues = (e) => {
+    if (!leaderboard && e.target.name === 'group1') {
+      setTime(e.target.value);
     }
-    if (leaderboard) {
-      if (e.target.name === 'group1') {
-        setChecked({
-          group1: { ...group1, [e.target.id]: true },
-          group2: { ...checked.group2 },
-        });
-        setFilterTime(e.target.value);
-      }
-      if (e.target.name === 'group2') {
-        setChecked({
-          group1: { ...checked.group1 },
-          group2: { ...group2, [e.target.id]: true },
-        });
-        setFilterFind(e.target.value);
-      }
+    if (!leaderboard && e.target.name === 'group2') {
+      setCharacters(e.target.value);
+    }
+    if (leaderboard && e.target.name === 'group1') {
+      setFilterTime(e.target.value);
+    }
+    if (leaderboard && e.target.name === 'group2') {
+      setFilterFind(e.target.value);
+    }
+  };
+  const setRadioChecked = (e) => {
+    if (e.target.name === 'group1') {
+      setChecked({
+        group1: { ...group1, [e.target.id]: true },
+        group2: { ...checked.group2 },
+      });
+    }
+    if (e.target.name === 'group2') {
+      setChecked({
+        group1: { ...checked.group1 },
+        group2: { ...group2, [e.target.id]: true },
+      });
     }
   };
   return (
@@ -97,7 +90,10 @@ const Settings = ({
               id="5"
               type="radio"
               checked={checked.group1[5]}
-              onChange={handleChange}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
               name="group1"
               value="5"
             />
@@ -109,7 +105,10 @@ const Settings = ({
               id="10"
               type="radio"
               checked={checked.group1[10]}
-              onChange={handleChange}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
               name="group1"
               value="10"
             />
@@ -121,7 +120,10 @@ const Settings = ({
               id="none"
               type="radio"
               checked={checked.group1['none']}
-              onChange={handleChange}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
               name="group1"
               value="none"
             />
@@ -136,7 +138,10 @@ const Settings = ({
               id="3"
               type="radio"
               checked={checked.group2[3]}
-              onChange={handleChange}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
               name="group2"
               value="3"
             />
@@ -148,7 +153,10 @@ const Settings = ({
               id="10"
               type="radio"
               checked={checked.group2[10]}
-              onChange={handleChange}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
               name="group2"
               value="10"
             />
@@ -160,7 +168,10 @@ const Settings = ({
               id="all"
               type="radio"
               checked={checked.group2['all']}
-              onChange={handleChange}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
               name="group2"
               value="all"
             />
