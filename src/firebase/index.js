@@ -19,7 +19,7 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-export const verifyCharacterData = async (coords, id) => {
+export const isCharacterFound = async (coords, id) => {
   const { x, y } = coords;
   const docRef = doc(db, 'where-is-mk', 'characters');
   const docSnap = await getDoc(docRef);

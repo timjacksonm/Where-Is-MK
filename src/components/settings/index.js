@@ -30,7 +30,8 @@ const Settings = ({
     10: false,
     all: false,
   };
-  //component is reisued on leaderboard. !leaderboard is referring to settings on home page
+  //!leaderboard is referring to settings component used on home page
+  //leaderboard is referring to settings component on leaderboard page
   const [checked, setChecked] = useState(() =>
     !leaderboard
       ? { group1: group1, group2: group2 }
@@ -84,6 +85,21 @@ const Settings = ({
         <RadioGroup divider>
           <Title checked={checked}>Time limit:</Title>
           <RadioLabel>
+            {checked.group1['none'] ? <Checked /> : <Unchecked />}
+            <Description>Unlimited</Description>
+            <HiddenRadio
+              id="none"
+              type="radio"
+              checked={checked.group1['none']}
+              onChange={(e) => {
+                setRadioChecked(e);
+                setStateWithValues(e);
+              }}
+              name="group1"
+              value="none"
+            />
+          </RadioLabel>
+          <RadioLabel>
             {checked.group1[5] ? <Checked /> : <Unchecked />}
             <Description>5 Minutes</Description>
             <HiddenRadio
@@ -111,21 +127,6 @@ const Settings = ({
               }}
               name="group1"
               value="10"
-            />
-          </RadioLabel>
-          <RadioLabel>
-            {checked.group1['none'] ? <Checked /> : <Unchecked />}
-            <Description>Unlimited</Description>
-            <HiddenRadio
-              id="none"
-              type="radio"
-              checked={checked.group1['none']}
-              onChange={(e) => {
-                setRadioChecked(e);
-                setStateWithValues(e);
-              }}
-              name="group1"
-              value="none"
             />
           </RadioLabel>
         </RadioGroup>

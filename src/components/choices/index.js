@@ -9,15 +9,15 @@ import {
   Name,
   CloseButton,
 } from './choices.styles';
-import { verifyCharacterData } from '../../firebase';
+import { isCharacterFound } from '../../firebase';
 let timeoutID;
 
 const Choices = (props) => {
   const { charactersToFind, setPositionXY, setAlertText } = props;
   const { targetPosition, modalPosition, exactCoords } = props.positionXY;
 
-  const handleClick = async (id, name) => {
-    const response = await verifyCharacterData(exactCoords, id);
+  const handleCharacterSelection = async (id, name) => {
+    const response = await isCharacterFound(exactCoords, id);
     clearTimeout(timeoutID);
     if (response) {
       setAlertText({ string: `You found ${name}`, bgColor: '#006400' });
@@ -43,7 +43,7 @@ const Choices = (props) => {
       <CharactersContainer $modalPosition={modalPosition}>
         {charactersToFind.characters.map(({ id, name, src }) => {
           return (
-            <Card key={id} onClick={() => handleClick(id, name)}>
+            <Card key={id} onClick={() => handleCharacterSelection(id, name)}>
               <CloseButton size="1.5em" onClick={handleClose} />
               <PortraitContainer>
                 <PortraitImage src={src} alt={id} />
