@@ -13,7 +13,7 @@ const Footer = () => {
           <Link href="https://github.com/timjacksonm">
             <GithubIcon />
           </Link>
-          <Link href="https://twitter.com/TimJacksonMN">
+          <Link href="https://twitter.com/timjacksonm">
             <TwitterIcon />
           </Link>
         </LinkContainer>
